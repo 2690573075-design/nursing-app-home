@@ -543,7 +543,7 @@
     height: 44px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 8px;
     margin-top: 16px;
   }
@@ -963,15 +963,6 @@
 
       <div class="mission-header">
         <span class="header-title">派工列表</span>
-        <div class="header-actions">
-          <button class="icon-btn">
-            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
-          </button>
-          <button class="icon-btn">
-            <img src="icons/icon-24px-message.svg" alt="消息" width="24" height="24">
-            <span class="red-dot"></span>
-          </button>
-        </div>
       </div>
 
       <div class="date-switcher">
@@ -1128,11 +1119,6 @@
           </button>
         </div>
 
-        <!-- Ended Section Header (Figma: 7:1882, 7:1883) -->
-        <div class="ended-header">
-          <span>已結束 3 項派工</span>
-        </div>
-
         <!-- 9. Done card (Figma: earlier completed tasks) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
@@ -1150,6 +1136,40 @@
         </div>
 
       </div><!-- /mission-card-list -->
+
+      <!-- Empty State for future dates (Figma: 124-2644) -->
+      <div id="emptyState" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding: 60px 16px; gap: 16px;">
+        <!-- Illustration area -->
+        <div style="width:200px; height:200px; background:#fff; border-radius:16px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+          <!-- Simplified idle robot illustration from Figma -->
+          <svg width="120" height="120" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <rect x="70" y="90" width="60" height="50" rx="8" fill="#E8EDF2"/>
+            <!-- Head -->
+            <rect x="80" y="60" width="40" height="35" rx="8" fill="#D0D8E0"/>
+            <!-- Eyes -->
+            <circle cx="92" cy="75" r="4" fill="#fff"/>
+            <circle cx="108" cy="75" r="4" fill="#fff"/>
+            <!-- Mouth (straight line = idle) -->
+            <line x1="92" y1="85" x2="108" y2="85" stroke="#9aa0a9" stroke-width="2" stroke-linecap="round"/>
+            <!-- Arms hanging down -->
+            <rect x="50" y="95" width="18" height="8" rx="4" fill="#D0D8E0"/>
+            <rect x="132" y="95" width="18" height="8" rx="4" fill="#D0D8E0"/>
+            <!-- Legs -->
+            <rect x="80" y="140" width="14" height="20" rx="6" fill="#C8D0D8"/>
+            <rect x="106" y="140" width="14" height="20" rx="6" fill="#C8D0D8"/>
+            <!-- Feet -->
+            <rect x="75" y="156" width="24" height="8" rx="4" fill="#B0B8C0"/>
+            <rect x="101" y="156" width="24" height="8" rx="4" fill="#B0B8C0"/>
+          </svg>
+        </div>
+        <!-- Text from Figma -->
+        <div style="text-align:center;">
+          <p style="font-size:16px; font-weight:400; color:#000; line-height:24px; margin:0;">暫無待執行派工</p>
+          <p style="font-size:16px; font-weight:400; color:#747980; line-height:24px; margin:8px 0 0;">都不給我事情做，是要我怎麼跟老闆交代...</p>
+        </div>
+      </div>
+
     </div><!-- /mission-scroll-area -->
 
   </section><!-- /page-mission -->
@@ -1289,6 +1309,7 @@
       syncMissionFilter();
       updateDateDisplay();
       updateDateArrowState();
+      updateEmptyState();
     }
   }
 
@@ -1297,15 +1318,29 @@
     var newDate = new Date(state.missionDate);
     newDate.setDate(newDate.getDate() + delta);
 
-    // Can't go past today
-    if (newDate > TODAY) return;
-    // Can't go more than 7 days back
-    var daysBack = getDaysDiff(TODAY, newDate);
-    if (daysBack > MAX_PAST_DAYS) return;
+    // Limit to ±7 days from today
+    var diffDays = getDaysDiff(newDate, TODAY);
+    if (Math.abs(diffDays) > MAX_PAST_DAYS) return;
 
     state.missionDate = newDate;
     updateDateDisplay();
     updateDateArrowState();
+    updateEmptyState();
+  }
+
+  function updateEmptyState() {
+    var emptyEl = document.getElementById('emptyState');
+    var cardList = document.getElementById('missionCardList');
+    if (!emptyEl || !cardList) return;
+    var diffDays = getDaysDiff(state.missionDate, TODAY);
+    // Show empty state for future dates (diffDays > 0 means future)
+    if (diffDays > 0) {
+      emptyEl.style.display = 'flex';
+      cardList.style.display = 'none';
+    } else {
+      emptyEl.style.display = 'none';
+      cardList.style.display = '';
+    }
   }
 
   function updateDateDisplay() {
@@ -1321,11 +1356,11 @@
     var btnPrev = document.getElementById('btnDatePrev');
     if (!btnNext || !btnPrev) return;
 
-    var isToday = state.missionDate.toDateString() === TODAY.toDateString();
-    btnNext.disabled = isToday;
-
-    var daysBack = getDaysDiff(TODAY, state.missionDate);
-    btnPrev.disabled = daysBack >= MAX_PAST_DAYS;
+    var diffDays = getDaysDiff(state.missionDate, TODAY);
+    // Future limit: can't go more than 7 days ahead
+    btnNext.disabled = diffDays >= MAX_PAST_DAYS;
+    // Past limit: can't go more than 7 days back
+    btnPrev.disabled = diffDays <= -MAX_PAST_DAYS;
   }
 
   // ── Mission: Filter Tabs ──

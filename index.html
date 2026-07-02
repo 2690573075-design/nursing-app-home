@@ -68,6 +68,16 @@
     flex-shrink: 0;
     background: linear-gradient(0deg, var(--gradient-top) 0%, var(--gradient-bottom) 100%);
     z-index: 2;
+    position: relative;
+  }
+  .top-area::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 0; right: 0;
+    height: 8px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
   }
 
   .header {
@@ -152,11 +162,10 @@
     background: var(--bg);
   }
   .task-list {
-    padding: 0 15px;
+    padding: 16px 15px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding-bottom: 0.5em;
   }
 
   .card {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>首頁 - 護理師</title>
+<title>護理師</title>
 <style>
   :root {
     --blue: #167eff;
@@ -21,6 +21,9 @@
     --bg: #eff3f7;
     --gradient-top: #f3f8ff;
     --gradient-bottom: #edf5ff;
+    --header-bg: #e3ecf9;
+    --filter-inactive-text: #4d5055;
+    --shift-sun: #ffae4b;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,6 +48,21 @@
     overflow: hidden;
     position: relative;
   }
+
+  /* ── SPA Page System ── */
+  .page {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  .page.active {
+    display: flex;
+  }
+
+  /* =============================================
+     PAGE 1: HOME (首頁)
+     ============================================= */
 
   /* ── Top Gradient Area (262px) ── */
   .top-area {
@@ -310,17 +328,19 @@
     overflow: visible;
   }
   .progress-fill {
-    width: 50%;
     height: 8px;
     background: var(--progress-fill);
     border-radius: 9px;
   }
+  .progress-fill.p50 { width: 50%; }
+  .progress-fill.p52 { width: 52%; }
   .progress-robot {
     position: absolute;
     top: 2px;
-    left: calc(50% - 12px);
     z-index: 2;
   }
+  .progress-robot.p50 { left: calc(50% - 12px); }
+  .progress-robot.p52 { left: calc(52% - 12px); }
   .progress-labels {
     display: flex;
     justify-content: space-between;
@@ -385,6 +405,360 @@
     line-height: 22px;
   }
 
+  /* =============================================
+     PAGE 2: MISSION LIST (派工列表)
+     ============================================= */
+
+  .page-mission {
+    background: var(--bg);
+  }
+
+  /* Mission Header Area */
+  .mission-top-area {
+    flex-shrink: 0;
+    background: var(--header-bg);
+    z-index: 2;
+  }
+
+  /* Status Bar (same) */
+  .mission-top-area .status-bar {
+    background: var(--header-bg);
+  }
+
+  /* Mission Header - 64px */
+  .mission-header {
+    height: 64px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .mission-header .header-title {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.5em;
+  }
+
+  /* Date Switcher - 60px */
+  .date-switcher {
+    height: 60px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--header-bg);
+  }
+  .date-arrow-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--card-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    flex-shrink: 0;
+  }
+  .date-arrow-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .date-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .date-display .date-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 24px;
+  }
+  .date-display .date-detail {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 22px;
+  }
+
+  /* Filter Tabs - 64px */
+  .filter-tabs-container {
+    height: 64px;
+    padding: 16px;
+    background: var(--header-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-right: 24px;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .filter-tab {
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 32px;
+    color: var(--filter-inactive-text);
+    background: var(--card-white);
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    flex-shrink: 0;
+  }
+  .filter-tab.active {
+    background: var(--blue);
+    color: #ffffff;
+    font-weight: 500;
+  }
+  .filter-fade-right {
+    position: absolute;
+    right: 0;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(90deg, transparent 0%, var(--header-bg) 100%);
+    pointer-events: none;
+  }
+
+  /* ── Mission Scroll Area ── */
+  .mission-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--bg);
+    padding: 0 16px;
+  }
+
+  /* Shift Group Label - 44px */
+  .shift-group {
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 16px;
+  }
+  .shift-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .shift-icon-circle {
+    width: 20px;
+    height: 20px;
+    background: var(--card-white);
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .shift-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    line-height: 22px;
+  }
+  .shift-subtitle-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-left: 28px;
+  }
+  .shift-subtitle-row .sub-line {
+    flex: 1;
+    height: 0;
+    border-top: 1px solid #D0D5DD;
+  }
+  .shift-subtitle-row span {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  /* Mission Card List */
+  .mission-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 12px;
+    padding-bottom: 16px;
+  }
+
+  /* Done card (grey, 86px) */
+  .mission-card-done {
+    background: var(--card-white);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .mission-card-done .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mission-card-done .card-info .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-done);
+    line-height: 24px;
+  }
+  .mission-card-done .card-info .card-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-done);
+    line-height: 22px;
+  }
+
+  /* Mission active card (blue header) */
+  .mission-card-active {
+    background: var(--card-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .mission-card-active .active-top {
+    height: 44px;
+    background: var(--blue-active);
+    padding: 12px 16px 8px;
+    display: flex;
+    align-items: center;
+  }
+  .mission-card-active .active-top .active-top-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 24px;
+  }
+  .mission-card-active .active-mid {
+    padding: 8px 12px 12px;
+    border-bottom: 1px solid #DDE5EF;
+  }
+  .mission-card-active .active-mid .active-mid-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 24px;
+  }
+  .mission-card-active .active-mid .active-mid-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 22px;
+    margin-top: 4px;
+  }
+  .mission-card-active .active-progress {
+    padding: 12px;
+  }
+
+  /* Mission pending card (86px) */
+  .mission-card-pending {
+    background: var(--card-white);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .mission-card-pending .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mission-card-pending .card-info .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    line-height: 24px;
+  }
+  .mission-card-pending .card-info .card-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 22px;
+  }
+
+  /* Ended section header - 48px */
+  .ended-header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    background: var(--bg);
+  }
+  .ended-header span {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 24px;
+  }
+
+  /* =============================================
+     PAGE 3: MINE (我的) - Placeholder
+     ============================================= */
+  .page-mine {
+    background: var(--bg);
+  }
+  .mine-top-area {
+    flex-shrink: 0;
+    background: var(--header-bg);
+    z-index: 2;
+  }
+  .mine-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+  .mine-placeholder {
+    text-align: center;
+    color: var(--gray-done);
+  }
+  .mine-placeholder .icon-large {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+  .mine-placeholder p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  /* =============================================
+     SHARED BOTTOM AREA
+     ============================================= */
+
   /* ── Bottom Area ── */
   .bottom-area {
     flex-shrink: 0;
@@ -439,6 +813,25 @@
     border-radius: 3px;
   }
 
+  /* ── Filter visibility ── */
+  .mission-card-list .task-item[data-status] {
+    display: block;
+  }
+  .mission-card-list.filter-executing .task-item[data-status="executing"],
+  .mission-card-list.filter-pending .task-item[data-status="pending"],
+  .mission-card-list.filter-done .task-item[data-status="done"],
+  .mission-card-list.filter-all .task-item[data-status] {
+    /* default visible */;
+  }
+  .mission-card-list.filter-executing .task-item:not([data-status="executing"]),
+  .mission-card-list.filter-pending .task-item:not([data-status="pending"]),
+  .mission-card-list.filter-done .task-item:not([data-status="done"]) {
+    display: none;
+  }
+  .mission-card-list.filter-all .task-item {
+    display: block;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 375px) {
     .phone-frame {
@@ -453,160 +846,463 @@
 
 <div class="phone-frame">
 
-  <!-- ▸ Top Gradient Area (262px) -->
-  <div class="top-area">
+  <!-- ============================================
+       PAGE 1: HOME (首頁)
+       ============================================ -->
+  <section class="page page-home active" id="pageHome">
 
-    <!-- Status Bar 36px -->
-    <div class="status-bar">
-      <span class="time">9:41</span>
-      <div class="status-icons">
-        <!-- wifi -->
-        <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
-          <path d="M7.28 2.18C10.21 2.18 12.87 3.84 14.12 6.11L12.8 7.43C11.78 5.54 9.7 4.2 7.28 4.2C4.86 4.2 2.78 5.54 1.76 7.43L0.44 6.11C1.69 3.84 4.35 2.18 7.28 2.18Z" fill="#1F2124"/>
-          <path d="M7.28 6.55C8.92 6.55 10.41 7.46 11.1 8.77L9.78 10.09C9.31 9.03 8.29 8.3 7.28 8.3C6.27 8.3 5.25 9.03 4.78 10.09L3.46 8.77C4.15 7.46 5.64 6.55 7.28 6.55Z" fill="#1F2124"/>
-          <path d="M7.28 10.92C7.87 10.92 8.37 11.42 8.37 12.01C8.37 12.6 7.87 13.1 7.28 13.1C6.69 13.1 6.19 12.6 6.19 12.01C6.19 11.42 6.69 10.92 7.28 10.92Z" fill="#1F2124"/>
-        </svg>
-        <!-- battery -->
-        <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
-          <rect x="1" y="4" width="11" height="7.5" rx="1.5" stroke="#1F2124" stroke-width="1" fill="none"/>
-          <rect x="12.5" y="6" width="1.5" height="3.5" rx="0.75" fill="#1F2124"/>
-          <rect x="2.5" y="5.5" width="8" height="4.5" rx="0.5" fill="#1F2124"/>
-        </svg>
-      </div>
-    </div>
+    <!-- ▸ Top Gradient Area (262px) -->
+    <div class="top-area">
 
-    <!-- Header 64px -->
-    <div class="header">
-      <span class="header-title">👋 Hi 護理師名稱</span>
-      <div class="header-actions">
-        <!-- scan -->
-        <button class="icon-btn">
-          <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
-        </button>
-        <!-- message + red dot -->
-        <button class="icon-btn">
-          <img src="icons/icon-24px-message.svg" alt="消息" width="24" height="24">
-          <span class="red-dot"></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 4-Grid Quick Entry 98px -->
-    <div class="quick-grid">
-      <div class="grid-item">
-        <img src="icons/icon-grid-medicine.svg" alt="藥品配送">
-        <span>藥品配送</span>
-      </div>
-      <div class="grid-item">
-        <img src="icons/icon-grid-specimen.svg" alt="檢體取送">
-        <span>檢體取送</span>
-      </div>
-      <div class="grid-item">
-        <img src="icons/icon-grid-health-edu.svg" alt="護理衛教">
-        <span>護理衛教</span>
-      </div>
-      <div class="grid-item">
-        <img src="icons/icon-grid-environment.svg" alt="環境介紹">
-        <span>環境介紹</span>
-      </div>
-    </div>
-
-    <!-- Section Title 48px -->
-    <div class="section-title">
-      <span class="left">最近的派工</span>
-      <button class="right">查看全部</button>
-    </div>
-  </div><!-- /top-area -->
-
-  <!-- ▸ Scrollable Task List -->
-  <div class="scroll-area">
-    <div class="task-list">
-
-      <!-- 1. Completed -->
-      <div class="card card-completed">
-        <span class="title">藥品配送</span>
-        <span class="subtitle">於 <b>10:20</b> 結束</span>
-      </div>
-
-      <!-- Divider -->
-      <div class="divider-row">
-        <span class="line"></span>
-        <span>以上是最近10分鐘內結束的派工</span>
-        <span class="line"></span>
-      </div>
-
-      <!-- 2. Active / In-Progress -->
-      <div class="card card-active">
-        <div class="active-header">
-          <span class="title">藥品配送</span>
-        </div>
-        <div class="active-info">
-          <div class="info-title">正在領取藥品</div>
-          <div class="info-sub">護理師正在領取藥品</div>
-        </div>
-        <div class="progress-section">
-          <div class="progress-row">
-            <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
-            <div class="progress-track-zone">
-              <div class="progress-track">
-                <div class="progress-fill"></div>
-              </div>
-              <img class="progress-robot" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
-            </div>
-            <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
-          </div>
-          <div class="progress-labels">
-            <span>護理站</span>
-            <span>A-2</span>
-            <span>護理站</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Warning Card -->
-      <div class="card card-warning">
-        <div class="title">檢體取送</div>
-        <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
-        <div class="warning-banner">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="10" r="9" stroke="#ee913e" stroke-width="1.5"/>
-            <path d="M10 6v5M10 13.5v.5" stroke="#ee913e" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Status Bar 36px -->
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="status-icons">
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <path d="M7.28 2.18C10.21 2.18 12.87 3.84 14.12 6.11L12.8 7.43C11.78 5.54 9.7 4.2 7.28 4.2C4.86 4.2 2.78 5.54 1.76 7.43L0.44 6.11C1.69 3.84 4.35 2.18 7.28 2.18Z" fill="#1F2124"/>
+            <path d="M7.28 6.55C8.92 6.55 10.41 7.46 11.1 8.77L9.78 10.09C9.31 9.03 8.29 8.3 7.28 8.3C6.27 8.3 5.25 9.03 4.78 10.09L3.46 8.77C4.15 7.46 5.64 6.55 7.28 6.55Z" fill="#1F2124"/>
+            <path d="M7.28 10.92C7.87 10.92 8.37 11.42 8.37 12.01C8.37 12.6 7.87 13.1 7.28 13.1C6.69 13.1 6.19 12.01 6.19 12.01C6.19 11.42 6.69 10.92 7.28 10.92Z" fill="#1F2124"/>
           </svg>
-          <span class="warn-text">派工異動，延後執行時間</span>
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <rect x="1" y="4" width="11" height="7.5" rx="1.5" stroke="#1F2124" stroke-width="1" fill="none"/>
+            <rect x="12.5" y="6" width="1.5" height="3.5" rx="0.75" fill="#1F2124"/>
+            <rect x="2.5" y="5.5" width="8" height="4.5" rx="0.5" fill="#1F2124"/>
+          </svg>
         </div>
       </div>
 
-      <!-- 4. Normal Pending -->
-      <div class="card card-pending">
-        <div class="title">藥品配送</div>
-        <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+      <!-- Header 64px -->
+      <div class="header">
+        <span class="header-title">👋 Hi 護理師名稱</span>
+        <div class="header-actions">
+          <button class="icon-btn">
+            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
+          </button>
+          <button class="icon-btn">
+            <img src="icons/icon-24px-message.svg" alt="消息" width="24" height="24">
+            <span class="red-dot"></span>
+          </button>
+        </div>
       </div>
 
-      <!-- 5. Normal Pending -->
-      <div class="card card-pending">
-        <div class="title">藥品配送</div>
-        <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+      <!-- 4-Grid Quick Entry 98px -->
+      <div class="quick-grid">
+        <div class="grid-item">
+          <img src="icons/icon-grid-medicine.svg" alt="藥品配送">
+          <span>藥品配送</span>
+        </div>
+        <div class="grid-item">
+          <img src="icons/icon-grid-specimen.svg" alt="檢體取送">
+          <span>檢體取送</span>
+        </div>
+        <div class="grid-item">
+          <img src="icons/icon-grid-health-edu.svg" alt="護理衛教">
+          <span>護理衛教</span>
+        </div>
+        <div class="grid-item">
+          <img src="icons/icon-grid-environment.svg" alt="環境介紹">
+          <span>環境介紹</span>
+        </div>
       </div>
 
+      <!-- Section Title 48px -->
+      <div class="section-title">
+        <span class="left">最近的派工</span>
+        <button class="right" onclick="switchPage('mission','all')">查看全部</button>
+      </div>
+    </div><!-- /top-area -->
+
+    <!-- ▸ Scrollable Task List -->
+    <div class="scroll-area">
+      <div class="task-list">
+
+        <!-- 1. Completed -->
+        <div class="card card-completed">
+          <span class="title">藥品配送</span>
+          <span class="subtitle">於 <b>10:20</b> 結束</span>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider-row">
+          <span class="line"></span>
+          <span>以上是最近10分鐘內結束的派工</span>
+          <span class="line"></span>
+        </div>
+
+        <!-- 2. Active / In-Progress -->
+        <div class="card card-active">
+          <div class="active-header">
+            <span class="title">藥品配送</span>
+          </div>
+          <div class="active-info">
+            <div class="info-title">正在領取藥品</div>
+            <div class="info-sub">護理師正在領取藥品</div>
+          </div>
+          <div class="progress-section">
+            <div class="progress-row">
+              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+              <div class="progress-track-zone">
+                <div class="progress-track">
+                  <div class="progress-fill p50"></div>
+                </div>
+                <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
+              </div>
+              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+            </div>
+            <div class="progress-labels">
+              <span>護理站</span>
+              <span>A-2</span>
+              <span>護理站</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Warning Card -->
+        <div class="card card-warning">
+          <div class="title">檢體取送</div>
+          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+          <div class="warning-banner">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="9" stroke="#ee913e" stroke-width="1.5"/>
+              <path d="M10 6v5M10 13.5v.5" stroke="#ee913e" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="warn-text">派工異動，延後執行時間</span>
+          </div>
+        </div>
+
+        <!-- 4. Normal Pending -->
+        <div class="card card-pending">
+          <div class="title">藥品配送</div>
+          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+        </div>
+
+        <!-- 5. Normal Pending -->
+        <div class="card card-pending">
+          <div class="title">藥品配送</div>
+          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+        </div>
+
+      </div>
+    </div><!-- /scroll-area -->
+
+  </section><!-- /page-home -->
+
+
+  <!-- ============================================
+       PAGE 2: MISSION LIST (派工列表)
+       ============================================ -->
+  <section class="page page-mission" id="pageMission">
+
+    <!-- ▸ Mission Top Area -->
+    <div class="mission-top-area">
+
+      <!-- Status Bar 36px -->
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="status-icons">
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <path d="M7.28 2.18C10.21 2.18 12.87 3.84 14.12 6.11L12.8 7.43C11.78 5.54 9.7 4.2 7.28 4.2C4.86 4.2 2.78 5.54 1.76 7.43L0.44 6.11C1.69 3.84 4.35 2.18 7.28 2.18Z" fill="#1F2124"/>
+            <path d="M7.28 6.55C8.92 6.55 10.41 7.46 11.1 8.77L9.78 10.09C9.31 9.03 8.29 8.3 7.28 8.3C6.27 8.3 5.25 9.03 4.78 10.09L3.46 8.77C4.15 7.46 5.64 6.55 7.28 6.55Z" fill="#1F2124"/>
+            <path d="M7.28 10.92C7.87 10.92 8.37 11.42 8.37 12.01C8.37 12.6 7.87 13.1 7.28 13.1C6.69 13.1 6.19 12.01 6.19 12.01C6.19 11.42 6.69 10.92 7.28 10.92Z" fill="#1F2124"/>
+          </svg>
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <rect x="1" y="4" width="11" height="7.5" rx="1.5" stroke="#1F2124" stroke-width="1" fill="none"/>
+            <rect x="12.5" y="6" width="1.5" height="3.5" rx="0.75" fill="#1F2124"/>
+            <rect x="2.5" y="5.5" width="8" height="4.5" rx="0.5" fill="#1F2124"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Header 64px -->
+      <div class="mission-header">
+        <span class="header-title">派工列表</span>
+        <div class="header-actions">
+          <button class="icon-btn">
+            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
+          </button>
+          <button class="icon-btn">
+            <img src="icons/icon-24px-message.svg" alt="消息" width="24" height="24">
+            <span class="red-dot"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Date Switcher 60px -->
+      <div class="date-switcher">
+        <button class="date-arrow-btn" id="btnDatePrev" onclick="changeDate(-1)" aria-label="前一天">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="date-display" id="dateDisplay">
+          <span class="date-label">今日</span>
+          <span class="date-detail">10/31（四）</span>
+        </div>
+        <button class="date-arrow-btn" id="btnDateNext" onclick="changeDate(1)" aria-label="後一天">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Filter Tabs 64px -->
+      <div class="filter-tabs-container">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">全部<span id="countAll">(9)</span></button>
+          <button class="filter-tab" data-filter="pending" onclick="setFilter('pending')">待執行<span id="countPending">(3)</span></button>
+          <button class="filter-tab" data-filter="executing" onclick="setFilter('executing')">執行中<span id="countExecuting">(3)</span></button>
+          <button class="filter-tab" data-filter="done" onclick="setFilter('done')">已結束<span id="countDone">(3)</span></button>
+        </div>
+        <div class="filter-fade-right"></div>
+      </div>
+
+    </div><!-- /mission-top-area -->
+
+    <!-- ▸ Mission Scrollable Content -->
+    <div class="mission-scroll-area">
+
+      <!-- Shift Group Label -->
+      <div class="shift-group">
+        <div class="shift-row">
+          <div class="shift-icon-circle">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="3" fill="#ffae4b"/>
+              <path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.5 2.5l1.4 1.4M8.1 8.1l1.4 1.4M2.5 9.5l1.4-1.4M8.1 3.9l1.4-1.4" stroke="#ffae4b" stroke-width="0.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="shift-label">白班</span>
+        </div>
+        <div class="shift-subtitle-row">
+          <span class="sub-line"></span>
+          <span>你工作時段的派工</span>
+          <span class="sub-line"></span>
+        </div>
+      </div>
+
+      <!-- Mission Card List -->
+      <div class="mission-card-list filter-all" id="missionCardList">
+
+        <!-- 1. Done card -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
+            <div class="card-info">
+              <span class="card-title">藥品配送</span>
+              <span class="card-sub">於 10:20 結束</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
+              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 2. Active card - Medicine (184px) -->
+        <div class="task-item" data-status="executing">
+          <button class="mission-card-active" onclick="alert('任務詳情（藥品配送-執行中）')">
+            <div class="active-top">
+              <span class="active-top-title">藥品配送</span>
+            </div>
+            <div class="active-mid">
+              <div class="active-mid-title">正在領取藥品</div>
+              <div class="active-mid-sub">護理師正在領取藥品</div>
+            </div>
+            <div class="active-progress">
+              <div class="progress-row">
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+                <div class="progress-track-zone">
+                  <div class="progress-track">
+                    <div class="progress-fill p50"></div>
+                  </div>
+                  <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
+                </div>
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+              </div>
+              <div class="progress-labels">
+                <span>護理站</span>
+                <span>A-2</span>
+                <span>護理站</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 3. Active card - Specimen (183px) -->
+        <div class="task-item" data-status="executing">
+          <button class="mission-card-active" onclick="alert('任務詳情（檢體取送-執行中）')">
+            <div class="active-top">
+              <span class="active-top-title">檢體取送</span>
+            </div>
+            <div class="active-mid">
+              <div class="active-mid-title">請前往 B-1 區交付檢體</div>
+              <div class="active-mid-sub">請儘速前來，避免機器人超時離去</div>
+            </div>
+            <div class="active-progress">
+              <div class="progress-row">
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+                <div class="progress-track-zone">
+                  <div class="progress-track">
+                    <div class="progress-fill p52"></div>
+                  </div>
+                  <img class="progress-robot p52" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
+                </div>
+                <img class="station-icon" src="icons/icon-24px-specimen-station.svg" alt="檢體站" width="24" height="24">
+              </div>
+              <div class="progress-labels">
+                <span style="color:#4d5055">護理站</span>
+                <span>B-1</span>
+                <span>檢體站</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 4. Pending card -->
+        <div class="task-item" data-status="pending">
+          <button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')">
+            <div class="card-info">
+              <span class="card-title">檢體取送</span>
+              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
+              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Shift Change Divider -->
+        <div class="divider-row" style="padding: 8px 0;">
+          <span class="line"></span>
+          <span>因轉換班別，不執行派工記錄 (4)</span>
+          <span class="line"></span>
+        </div>
+
+        <!-- 5. Pending card (post-shift) -->
+        <div class="task-item" data-status="pending">
+          <button class="mission-card-pending" onclick="alert('任務詳情（環境介紹-待執行）')">
+            <div class="card-info">
+              <span class="card-title">環境介紹-帶入病室</span>
+              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
+              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 6. Pending card -->
+        <div class="task-item" data-status="pending">
+          <button class="mission-card-pending" onclick="alert('任務詳情（藥品配送-待執行）')">
+            <div class="card-info">
+              <span class="card-title">藥品配送</span>
+              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
+              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Ended Section Header -->
+        <div class="ended-header">
+          <span>已結束 3 項派工</span>
+        </div>
+
+        <!-- 7. Done card -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
+            <div class="card-info">
+              <span class="card-title">藥品配送</span>
+              <span class="card-sub">於 10:20 結束</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
+              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 8. Done card -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')">
+            <div class="card-info">
+              <span class="card-title">檢體取送</span>
+              <span class="card-sub">於 10:20 結束</span>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
+              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div><!-- /mission-card-list -->
+    </div><!-- /mission-scroll-area -->
+
+  </section><!-- /page-mission -->
+
+
+  <!-- ============================================
+       PAGE 3: MINE (我的) - Placeholder
+       ============================================ -->
+  <section class="page page-mine" id="pageMine">
+
+    <div class="mine-top-area">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="status-icons">
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <path d="M7.28 2.18C10.21 2.18 12.87 3.84 14.12 6.11L12.8 7.43C11.78 5.54 9.7 4.2 7.28 4.2C4.86 4.2 2.78 5.54 1.76 7.43L0.44 6.11C1.69 3.84 4.35 2.18 7.28 2.18Z" fill="#1F2124"/>
+            <path d="M7.28 6.55C8.92 6.55 10.41 7.46 11.1 8.77L9.78 10.09C9.31 9.03 8.29 8.3 7.28 8.3C6.27 8.3 5.25 9.03 4.78 10.09L3.46 8.77C4.15 7.46 5.64 6.55 7.28 6.55Z" fill="#1F2124"/>
+            <path d="M7.28 10.92C7.87 10.92 8.37 11.42 8.37 12.01C8.37 12.6 7.87 13.1 7.28 13.1C6.69 13.1 6.19 12.01 6.19 12.01C6.19 11.42 6.69 10.92 7.28 10.92Z" fill="#1F2124"/>
+          </svg>
+          <svg width="14.56" height="14.56" viewBox="0 0 15 15" fill="none">
+            <rect x="1" y="4" width="11" height="7.5" rx="1.5" stroke="#1F2124" stroke-width="1" fill="none"/>
+            <rect x="12.5" y="6" width="1.5" height="3.5" rx="0.75" fill="#1F2124"/>
+            <rect x="2.5" y="5.5" width="8" height="4.5" rx="0.5" fill="#1F2124"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Header -->
+      <div class="mission-header">
+        <span class="header-title">我的</span>
+      </div>
     </div>
-  </div><!-- /scroll-area -->
 
-  <!-- ▸ Bottom Fixed Area -->
+    <div class="mine-content">
+      <div class="mine-placeholder">
+        <svg class="icon-large" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="24" r="12" stroke="#9aa0a9" stroke-width="3"/>
+          <path d="M12 56c0-11 9-20 20-20s20 9 20 20" stroke="#9aa0a9" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <p>個人中心敬請期待</p>
+      </div>
+    </div>
+
+  </section><!-- /page-mine -->
+
+
+  <!-- ============================================
+       SHARED BOTTOM AREA
+       ============================================ -->
   <div class="bottom-area">
     <!-- Navigation Bar 66px -->
-    <div class="bottom-nav">
-      <div class="nav-tab active">
-        <img src="icons/icon-32px-home-selected.svg" alt="首頁" width="32" height="32">
+    <div class="bottom-nav" id="bottomNav">
+      <button class="nav-tab active" data-page="home" onclick="switchPage('home')">
+        <img src="icons/icon-32px-home-selected.svg" alt="首頁" width="32" height="32" class="tab-icon" data-icon-home-default="icons/icon-32px-home-default.svg" data-icon-home-selected="icons/icon-32px-home-selected.svg">
         <span>首頁</span>
-      </div>
-      <div class="nav-tab">
-        <img src="icons/icon-32px-mission-default.svg" alt="派工列表" width="32" height="32">
+      </button>
+      <button class="nav-tab" data-page="mission" onclick="switchPage('mission')">
+        <img src="icons/icon-32px-mission-default.svg" alt="派工列表" width="32" height="32" class="tab-icon" data-icon-mission-default="icons/icon-32px-mission-default.svg" data-icon-mission-selected="icons/icon-32px-mission-selected.svg">
         <span>派工列表</span>
-      </div>
-      <div class="nav-tab">
-        <img src="icons/icon-32px-mine-default.svg" alt="我的" width="32" height="32">
+      </button>
+      <button class="nav-tab" data-page="mine" onclick="switchPage('mine')">
+        <img src="icons/icon-32px-mine-default.svg" alt="我的" width="32" height="32" class="tab-icon" data-icon-mine-default="icons/icon-32px-mine-default.svg" data-icon-mine-selected="icons/icon-32px-mine-default.svg">
         <span>我的</span>
-      </div>
+      </button>
     </div>
     <!-- Home Indicator 34px -->
     <div class="home-indicator">
@@ -615,6 +1311,128 @@
   </div>
 
 </div><!-- /phone-frame -->
+
+
+<!-- =============================================
+     JAVASCRIPT: SPA State Management
+     ============================================= -->
+<script>
+  // ── State ──
+  const TODAY = new Date();
+  const state = {
+    currentPage: 'home',
+    missionDate: new Date(),       // date currently viewed on mission page
+    missionFilter: 'all',         // 'all' | 'pending' | 'executing' | 'done'
+    defaultFilter: 'all'          // filter to apply when switching to mission
+  };
+
+  // ── Weekday helper ──
+  const WEEKDAYS = ['日','一','二','三','四','五','六'];
+
+  function formatDate(d) {
+    const now = new Date();
+    const isToday = d.toDateString() === now.toDateString();
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+    const wd = WEEKDAYS[d.getDay()];
+    return {
+      label: isToday ? '今日' : `${m}/${day}`,
+      detail: `${m}/${day}（${wd}）`,
+      isToday
+    };
+  }
+
+  // ── Page Switching ──
+  function switchPage(pageName, defaultFilter) {
+    // Update state
+    state.currentPage = pageName;
+    if (defaultFilter) {
+      state.missionFilter = defaultFilter;
+      state.defaultFilter = defaultFilter;
+    }
+
+    // Toggle page visibility
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById('page' + pageName.charAt(0).toUpperCase() + pageName.slice(1));
+    if (targetPage) targetPage.classList.add('active');
+
+    // Update bottom nav tabs
+    const tabs = document.querySelectorAll('#bottomNav .nav-tab');
+    tabs.forEach(tab => {
+      const isActive = tab.dataset.page === pageName;
+      tab.classList.toggle('active', isActive);
+      // Update icon
+      const icon = tab.querySelector('.tab-icon');
+      if (icon) {
+        const iconKey = tab.dataset.page;
+        const defaultSrc = icon.dataset['icon' + iconKey.charAt(0).toUpperCase() + iconKey.slice(1) + 'Default'];
+        const selectedSrc = icon.dataset['icon' + iconKey.charAt(0).toUpperCase() + iconKey.slice(1) + 'Selected'];
+        icon.src = isActive ? selectedSrc : defaultSrc;
+      }
+    });
+
+    // If switching to mission page, sync filter state
+    if (pageName === 'mission') {
+      syncMissionFilter();
+      updateDateDisplay();
+      updateDateArrowState();
+    }
+  }
+
+  // ── Mission: Date Navigation ──
+  function changeDate(delta) {
+    const newDate = new Date(state.missionDate);
+    newDate.setDate(newDate.getDate() + delta);
+
+    // Can't go past today
+    if (newDate > TODAY) return;
+
+    state.missionDate = newDate;
+    updateDateDisplay();
+    updateDateArrowState();
+  }
+
+  function updateDateDisplay() {
+    const display = document.getElementById('dateDisplay');
+    if (!display) return;
+    const fmt = formatDate(state.missionDate);
+    display.querySelector('.date-label').textContent = fmt.label;
+    display.querySelector('.date-detail').textContent = fmt.detail;
+  }
+
+  function updateDateArrowState() {
+    const btnNext = document.getElementById('btnDateNext');
+    if (!btnNext) return;
+    const isToday = state.missionDate.toDateString() === TODAY.toDateString();
+    btnNext.disabled = isToday;
+  }
+
+  // ── Mission: Filter Tabs ──
+  function setFilter(filterName) {
+    state.missionFilter = filterName;
+
+    // Update tab active states
+    document.querySelectorAll('#filterTabs .filter-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.filter === filterName);
+    });
+
+    // Update card list filter class
+    const cardList = document.getElementById('missionCardList');
+    if (cardList) {
+      cardList.className = 'mission-card-list filter-' + filterName;
+    }
+  }
+
+  function syncMissionFilter() {
+    setFilter(state.missionFilter);
+  }
+
+  // ── Init ──
+  document.addEventListener('DOMContentLoaded', () => {
+    updateDateDisplay();
+    updateDateArrowState();
+  });
+</script>
 
 </body>
 </html>

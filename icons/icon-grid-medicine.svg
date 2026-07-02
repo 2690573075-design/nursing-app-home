@@ -1,22 +1,28 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 1984080506">
 <rect width="40" height="40" fill="white"/>
-<g filter="url(#filter0_d_1_2960)">
-<path d="M11.4235 8.58969V11.8558C11.4235 13.0089 10.867 14.0912 9.92922 14.7622L7.08686 16.7958C6.14904 17.4668 5.59261 18.5491 5.59261 19.7022V29.2028C5.59261 31.452 6.65136 33.57 8.45048 34.9198L8.73345 35.1322C9.97082 36.0606 11.476 36.5624 13.0229 36.5624H23.1781C24.725 36.5624 26.2302 36.0606 27.4676 35.1322L27.7506 34.9198C29.5497 33.57 30.6084 31.452 30.6084 29.2028V19.7022C30.6084 18.5491 30.052 17.4668 29.1142 16.7958L26.2718 14.7622C25.334 14.0912 24.7776 13.0089 24.7776 11.8558V8.58969H11.4235Z" fill="url(#paint0_linear_1_2960)" stroke="url(#paint1_linear_1_2960)" stroke-width="1.25079" stroke-linecap="round"/>
-<path d="M11.5122 17.1606H24.688C26.5235 17.1606 28.012 18.6485 28.0122 20.4839V28.0845C28.0121 29.9433 27.1331 31.6923 25.6421 32.8022C24.6269 33.558 23.395 33.9663 22.1294 33.9663H14.0718C12.8062 33.9663 11.5743 33.558 10.5591 32.8022C9.06809 31.6923 8.18904 29.9433 8.18896 28.0845V20.4839C8.1892 18.6486 9.67693 17.1609 11.5122 17.1606Z" fill="url(#paint2_linear_1_2960)" stroke="url(#paint3_linear_1_2960)" stroke-width="0.5" stroke-linecap="round"/>
-<g filter="url(#filter1_d_1_2960)">
+<g id="Group 1437253008" filter="url(#filter0_d_1_2960)">
+<path id="Union" d="M11.4235 8.58969V11.8558C11.4235 13.0089 10.867 14.0912 9.92922 14.7622L7.08686 16.7958C6.14904 17.4668 5.59261 18.5491 5.59261 19.7022V29.2028C5.59261 31.452 6.65136 33.57 8.45048 34.9198L8.73345 35.1322C9.97082 36.0606 11.476 36.5624 13.0229 36.5624H23.1781C24.725 36.5624 26.2302 36.0606 27.4676 35.1322L27.7506 34.9198C29.5497 33.57 30.6084 31.452 30.6084 29.2028V19.7022C30.6084 18.5491 30.052 17.4668 29.1142 16.7958L26.2718 14.7622C25.334 14.0912 24.7776 13.0089 24.7776 11.8558V8.58969H11.4235Z" fill="url(#paint0_linear_1_2960)" stroke="url(#paint1_linear_1_2960)" stroke-width="1.25079" stroke-linecap="round"/>
+<g id="Group 1437253007">
+<path id="Union_2" d="M11.5122 17.1606H24.688C26.5235 17.1606 28.012 18.6485 28.0122 20.4839V28.0845C28.0121 29.9433 27.1331 31.6923 25.6421 32.8022C24.6269 33.558 23.395 33.9663 22.1294 33.9663H14.0718C12.8062 33.9663 11.5743 33.558 10.5591 32.8022C9.06809 31.6923 8.18904 29.9433 8.18896 28.0845V20.4839C8.1892 18.6486 9.67693 17.1609 11.5122 17.1606Z" fill="url(#paint2_linear_1_2960)" stroke="url(#paint3_linear_1_2960)" stroke-width="0.5" stroke-linecap="round"/>
+<g id="Rectangle 161124493" filter="url(#filter1_d_1_2960)">
 <path d="M10.609 22.5763C10.609 21.886 11.1687 21.3263 11.859 21.3263H18.6742C19.3646 21.3263 19.9242 21.886 19.9242 22.5763C19.9242 23.2667 19.3646 23.8263 18.6742 23.8263H11.859C11.1687 23.8263 10.609 23.2667 10.609 22.5763Z" fill="url(#paint4_linear_1_2960)"/>
 </g>
-<g filter="url(#filter2_d_1_2960)">
+<g id="Rectangle 161124494" filter="url(#filter2_d_1_2960)">
 <rect x="10.609" y="26.0366" width="5.74475" height="2.5" rx="1.25" fill="url(#paint5_linear_1_2960)"/>
 </g>
-<foreignObject x="11.8136" y="12.0654" width="36.6825" height="36.6825"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(5.38px);clip-path:url(#bgblur_0_1_2960_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter3_ii_1_2960)" data-figma-bg-blur-radius="10.7541">
+</g>
+<g id="Group 1437253005">
+<foreignObject x="11.8136" y="12.0654" width="36.6825" height="36.6825"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(5.38px);clip-path:url(#bgblur_0_1_2960_clip_path);height:100%;width:100%"></div></foreignObject><g id="Ellipse 2007" filter="url(#filter3_ii_1_2960)" data-figma-bg-blur-radius="10.7541">
 <circle cx="30.1549" cy="30.4066" r="7.58722" fill="white" fill-opacity="0.1"/>
 </g>
-<rect x="29.5365" y="27.2865" width="2.14421" height="7.14738" rx="1.07211" fill="#5A9CF4"/>
-<rect x="34.1824" y="29.7881" width="2.14421" height="7.14738" rx="1.07211" transform="rotate(90 34.1824 29.7881)" fill="#5A9CF4"/>
-<path d="M24.355 2.63184H11.8462C10.2182 2.63207 8.89819 3.95213 8.89795 5.58008V8.3291C8.89795 8.97055 9.41861 9.49121 10.0601 9.49121H26.1411C26.7826 9.49121 27.3032 8.97055 27.3032 8.3291V5.58008C27.303 3.95213 25.9829 2.63208 24.355 2.63184Z" fill="url(#paint6_linear_1_2960)" stroke="url(#paint7_linear_1_2960)" stroke-width="1.25079"/>
+<rect id="Rectangle 161124495" x="29.5365" y="27.2865" width="2.14421" height="7.14738" rx="1.07211" fill="#5A9CF4"/>
+<rect id="Rectangle 161124496" x="34.1824" y="29.7881" width="2.14421" height="7.14738" rx="1.07211" transform="rotate(90 34.1824 29.7881)" fill="#5A9CF4"/>
 </g>
-<rect x="13.7358" y="10.9989" width="9.55973" height="1.61357" fill="url(#paint8_linear_1_2960)"/>
+<path id="Rectangle 161124502" d="M24.355 2.63184H11.8462C10.2182 2.63207 8.89819 3.95213 8.89795 5.58008V8.3291C8.89795 8.97055 9.41861 9.49121 10.0601 9.49121H26.1411C26.7826 9.49121 27.3032 8.97055 27.3032 8.3291V5.58008C27.303 3.95213 25.9829 2.63208 24.355 2.63184Z" fill="url(#paint6_linear_1_2960)" stroke="url(#paint7_linear_1_2960)" stroke-width="1.25079"/>
+</g>
+<rect id="Rectangle 161124503" x="13.7358" y="10.9989" width="9.55973" height="1.61357" fill="url(#paint8_linear_1_2960)"/>
+</g>
 <defs>
 <filter id="filter0_d_1_2960" x="3.30054" y="0.340169" width="36.1083" height="39.3204" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

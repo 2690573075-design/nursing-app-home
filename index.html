@@ -252,12 +252,12 @@
   .divider-row .line {
     flex: 1;
     height: 0;
-    border-top: 1px solid var(--divider-line);
+    border-top: 1px solid #888888;
   }
   .divider-row span {
     font-size: 12px;
     font-weight: 400;
-    color: var(--text-secondary);
+    color: #333333;
     white-space: nowrap;
   }
 
@@ -569,7 +569,7 @@
   .shift-label {
     font-size: 14px;
     font-weight: 700;
-    color: var(--text-secondary);
+    color: #333333;
     line-height: 22px;
   }
   .shift-subtitle-row {
@@ -580,12 +580,12 @@
   .shift-subtitle-row .sub-line {
     flex: 1;
     height: 0;
-    border-top: 1px solid var(--divider-line);
+    border-top: 1px solid #888888;
   }
   .shift-subtitle-row span {
     font-size: 12px;
     font-weight: 400;
-    color: var(--text-secondary);
+    color: #333333;
     white-space: nowrap;
     line-height: 14px;
   }
@@ -1026,7 +1026,8 @@
 
       <div class="mission-card-list filter-all" id="missionCardList">
 
-        <!-- 1. Done card - per Figma: no checkmark, grey text -->
+        <!-- 1-2. Done/completed tasks FIRST (Figma order: 7:1858, 7:1859 at top) -->
+
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
             <span class="card-title">藥品配送</span>
@@ -1034,7 +1035,15 @@
           </button>
         </div>
 
-        <!-- 2. Active card - Medicine (Figma: 7:1860) -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')">
+            <span class="card-title">檢體取送</span>
+            <span class="card-sub">於 10:12 結束</span>
+          </button>
+        </div>
+
+        <!-- 3-4. Active/executing cards (Figma: 7:1860, 7:1861) -->
+
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（藥品配送-執行中）')">
             <div class="active-top"><span class="active-top-title">藥品配送</span></div>
@@ -1056,7 +1065,6 @@
           </button>
         </div>
 
-        <!-- 3. Active card - Specimen (Figma: 7:1861) -->
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（檢體取送-執行中）')">
             <div class="active-top"><span class="active-top-title">檢體取送</span></div>
@@ -1080,7 +1088,7 @@
           </button>
         </div>
 
-        <!-- 4. Pending card - per Figma: no clock icon -->
+        <!-- 5. Pending card (no icon) -->
         <div class="task-item" data-status="pending">
           <button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')">
             <span class="card-title">檢體取送</span>
@@ -1088,16 +1096,15 @@
           </button>
         </div>
 
-        <!-- Shift Change Divider (Figma: 7:1863) -->
+        <!-- Shift Change Divider (Figma: 7:1863) - tasks below this are excluded from "completed at top" -->
         <div class="divider-row" style="padding: 8px 0;">
           <span class="line"></span>
           <span>因轉換班別，不執行派工記錄 (4)</span>
           <span class="line"></span>
         </div>
 
-        <!-- Post-shift cards - ALL done status per Figma (grey, "無法執行派工，請自行...") -->
+        <!-- Post-shift cards - all grey/done but SEPARATE from above completed tasks -->
 
-        <!-- 5. 環境介紹 (Figma: 7:1864) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')">
             <span class="card-title">環境介紹-帶入病室</span>
@@ -1105,7 +1112,6 @@
           </button>
         </div>
 
-        <!-- 6. 檢體取送 (Figma: 7:1865) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')">
             <span class="card-title">檢體取送</span>
@@ -1113,7 +1119,6 @@
           </button>
         </div>
 
-        <!-- 7. 藥品配送 (Figma: 7:1866) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')">
             <span class="card-title">藥品配送</span>
@@ -1121,27 +1126,10 @@
           </button>
         </div>
 
-        <!-- 8. 衛教任務 (Figma: 7:1867) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')">
             <span class="card-title">護理衛教</span>
             <span class="card-sub">無法執行派工，請重新預約衛教</span>
-          </button>
-        </div>
-
-        <!-- 9. Done card (Figma: earlier completed tasks) -->
-        <div class="task-item" data-status="done">
-          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
-            <span class="card-title">藥品配送</span>
-            <span class="card-sub">於 10:20 結束</span>
-          </button>
-        </div>
-
-        <!-- 10. Done card -->
-        <div class="task-item" data-status="done">
-          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')">
-            <span class="card-title">檢體取送</span>
-            <span class="card-sub">於 10:12 結束</span>
           </button>
         </div>
 

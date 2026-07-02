@@ -196,8 +196,8 @@
   .progress-fill.p50 { width: 50%; }
   .progress-fill.p52 { width: 52%; }
   .progress-robot { position: absolute; top: 2px; z-index: 2; width: 24px; height: 24px; }
-  .progress-robot.p50 { left: calc(50% - 12px); }
-  .progress-robot.p52 { left: calc(52% - 12px); }
+  .progress-robot.p50 { left: 50%; transform: translateX(-50%); }
+  .progress-robot.p52 { left: 52%; transform: translateX(-50%); }
   .progress-labels { display: flex; justify-content: space-between; padding: 0 24px; }
   .progress-labels span { font-size: 12px; font-weight: 400; color: var(--text-primary); text-align: center; }
   .progress-labels span:first-child, .progress-labels span:last-child { flex: 1; }

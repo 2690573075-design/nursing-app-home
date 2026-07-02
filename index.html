@@ -806,6 +806,7 @@
   }
 
   /* ── Filter visibility ── */
+  .task-item.shift-divider { display: block; }
   .mission-card-list.filter-executing .task-item:not([data-status="executing"]),
   .mission-card-list.filter-pending .task-item:not([data-status="pending"]),
   .mission-card-list.filter-done .task-item:not([data-status="done"]):not([data-status="done-shift"]) {
@@ -1102,11 +1103,13 @@
           </button>
         </div>
 
-        <!-- Shift Change Divider (Figma: 7:1863) - tasks below this are excluded from "completed at top" -->
-        <div class="divider-row" style="padding: 8px 0;">
-          <span class="line"></span>
-          <span>因轉換班別，不執行派工記錄 (4)</span>
-          <span class="line"></span>
+        <!-- Shift Change Divider (Figma: 7:1863) - only visible in "all" and "done" filters -->
+        <div class="task-item shift-divider" data-status="done-shift">
+          <div class="divider-row" style="padding: 8px 0;">
+            <span class="line"></span>
+            <span>因轉換班別，不執行派工記錄 (4)</span>
+            <span class="line"></span>
+          </div>
         </div>
 
         <!-- Post-shift cards - all grey/done but SEPARATE from above completed tasks -->

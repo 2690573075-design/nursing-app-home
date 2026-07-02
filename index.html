@@ -69,8 +69,10 @@
     background: linear-gradient(0deg, var(--gradient-top) 0%, var(--gradient-bottom) 100%);
     position: relative;
     z-index: 2;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding-bottom: 4px;
+    transition: box-shadow 0.2s;
+  }
+  .top-area.scrolled {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 
   .header {
@@ -603,7 +605,18 @@
     if (cardList) cardList.className = 'mission-card-list filter-' + filterName;
   }
   function syncMissionFilter() { setFilter(state.missionFilter); }
-  document.addEventListener('DOMContentLoaded', function() { updateDateDisplay(); updateDateArrowState(); });
+  document.addEventListener('DOMContentLoaded', function() {
+    updateDateDisplay();
+    updateDateArrowState();
+    // Scroll shadow for home page top-area
+    var homeScroll = document.querySelector('#pageHome .scroll-area');
+    var homeTop = document.querySelector('#pageHome .top-area');
+    if (homeScroll && homeTop) {
+      homeScroll.addEventListener('scroll', function() {
+        homeTop.classList.toggle('scrolled', homeScroll.scrollTop > 0);
+      }, {passive: true});
+    }
+  });
 </script>
 </body>
 </html>

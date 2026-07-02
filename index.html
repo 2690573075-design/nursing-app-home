@@ -553,7 +553,11 @@
   function formatDate(d) {
     var isToday = d.toDateString() === TODAY.toDateString();
     var m = d.getMonth() + 1, day = d.getDate(), wd = WEEKDAYS[d.getDay()];
-    return { label: isToday ? '今日' : m + '/' + day, detail: m + '/' + day + '（' + wd + '）', isToday: isToday };
+    return {
+      label: isToday ? '今日' : m + '/' + day,
+      detail: isToday ? m + '/' + day + '（' + wd + '）' : '（' + wd + '）',
+      isToday: isToday
+    };
   }
   function getDaysDiff(d1, d2) { return Math.floor((d1.getTime() - d2.getTime()) / 86400000); }
 

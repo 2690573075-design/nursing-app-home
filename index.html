@@ -808,11 +808,17 @@
   /* ── Filter visibility ── */
   .mission-card-list.filter-executing .task-item:not([data-status="executing"]),
   .mission-card-list.filter-pending .task-item:not([data-status="pending"]),
-  .mission-card-list.filter-done .task-item:not([data-status="done"]) {
+  .mission-card-list.filter-done .task-item:not([data-status="done"]):not([data-status="done-shift"]) {
     display: none;
   }
   .mission-card-list.filter-all .task-item {
     display: block;
+  }
+  /* Post-shift cards hidden in "all" and "pending" and "executing" filters */
+  .mission-card-list.filter-all .task-item[data-status="done-shift"],
+  .mission-card-list.filter-pending .task-item[data-status="done-shift"],
+  .mission-card-list.filter-executing .task-item[data-status="done-shift"] {
+    display: none;
   }
 
   /* ── Responsive ── */
@@ -1105,28 +1111,28 @@
 
         <!-- Post-shift cards - all grey/done but SEPARATE from above completed tasks -->
 
-        <div class="task-item" data-status="done">
+        <div class="task-item" data-status="done-shift">
           <button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')">
             <span class="card-title">環境介紹-帶入病室</span>
             <span class="card-sub">無法執行派工，請自行執行環境介紹</span>
           </button>
         </div>
 
-        <div class="task-item" data-status="done">
+        <div class="task-item" data-status="done-shift">
           <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')">
             <span class="card-title">檢體取送</span>
             <span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span>
           </button>
         </div>
 
-        <div class="task-item" data-status="done">
+        <div class="task-item" data-status="done-shift">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')">
             <span class="card-title">藥品配送</span>
             <span class="card-sub">無法執行派工，請自行前往護理站領藥</span>
           </button>
         </div>
 
-        <div class="task-item" data-status="done">
+        <div class="task-item" data-status="done-shift">
           <button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')">
             <span class="card-title">護理衛教</span>
             <span class="card-sub">無法執行派工，請重新預約衛教</span>

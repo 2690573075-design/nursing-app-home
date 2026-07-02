@@ -24,6 +24,7 @@
     --header-bg: #e3ecf9;
     --filter-inactive-text: #4d5055;
     --shift-sun: #ffae4b;
+    --divider-line: #888888;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -251,7 +252,7 @@
   .divider-row .line {
     flex: 1;
     height: 0;
-    border-top: 1px solid #888888;
+    border-top: 1px solid var(--divider-line);
   }
   .divider-row span {
     font-size: 12px;
@@ -317,7 +318,6 @@
     align-items: center;
     position: relative;
     height: 24px;
-    margin: 0 0px;
   }
   .progress-track {
     width: 100%;
@@ -419,13 +419,11 @@
     background: var(--header-bg);
     z-index: 2;
   }
-
-  /* Status Bar (same) */
   .mission-top-area .status-bar {
     background: var(--header-bg);
   }
 
-  /* Mission Header - 64px */
+  /* Mission Header - 64px (matches home header) */
   .mission-header {
     height: 64px;
     padding: 12px 16px;
@@ -540,13 +538,13 @@
     padding: 0 16px;
   }
 
-  /* Shift Group Label - 44px */
+  /* Shift Group Label - 44px.  Label at top, subtitle-divider at bottom */
   .shift-group {
     height: 44px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 4px;
+    justify-content: flex-start;
+    gap: 8px;
     margin-top: 16px;
   }
   .shift-row {
@@ -573,19 +571,19 @@
   .shift-subtitle-row {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding-left: 28px;
+    gap: 8px;
   }
   .shift-subtitle-row .sub-line {
     flex: 1;
     height: 0;
-    border-top: 1px solid #D0D5DD;
+    border-top: 1px solid var(--divider-line);
   }
   .shift-subtitle-row span {
     font-size: 12px;
     font-weight: 400;
     color: var(--text-secondary);
     white-space: nowrap;
+    line-height: 14px;
   }
 
   /* Mission Card List */
@@ -597,32 +595,27 @@
     padding-bottom: 16px;
   }
 
-  /* Done card (grey, 86px) */
+  /* Done card (grey, 86px) - no checkmark per Figma */
   .mission-card-done {
     background: var(--card-white);
     border-radius: 16px;
     padding: 16px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 4px;
     box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
     cursor: pointer;
     border: none;
     width: 100%;
     text-align: left;
   }
-  .mission-card-done .card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .mission-card-done .card-info .card-title {
+  .mission-card-done .card-title {
     font-size: 16px;
     font-weight: 700;
     color: var(--gray-done);
     line-height: 24px;
   }
-  .mission-card-done .card-info .card-sub {
+  .mission-card-done .card-sub {
     font-size: 14px;
     font-weight: 400;
     color: var(--gray-done);
@@ -674,44 +667,39 @@
     padding: 12px;
   }
 
-  /* Mission pending card (86px) */
+  /* Mission pending card (86px) - no clock icon per Figma */
   .mission-card-pending {
     background: var(--card-white);
     border-radius: 16px;
     padding: 16px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 4px;
     box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
     cursor: pointer;
     border: none;
     width: 100%;
     text-align: left;
   }
-  .mission-card-pending .card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .mission-card-pending .card-info .card-title {
+  .mission-card-pending .card-title {
     font-size: 16px;
     font-weight: 700;
     color: var(--text-secondary);
     line-height: 24px;
   }
-  .mission-card-pending .card-info .card-sub {
+  .mission-card-pending .card-sub {
     font-size: 14px;
     font-weight: 400;
     color: var(--text-secondary);
     line-height: 22px;
   }
 
-  /* Ended section header - 48px */
+  /* Ended section header - 48px (from Figma: y=-183, h=48, text at y=-167) */
   .ended-header {
     height: 48px;
     display: flex;
     align-items: center;
-    padding-left: 0;
+    padding: 16px 0 8px;
     background: var(--bg);
   }
   .ended-header span {
@@ -814,15 +802,6 @@
   }
 
   /* ── Filter visibility ── */
-  .mission-card-list .task-item[data-status] {
-    display: block;
-  }
-  .mission-card-list.filter-executing .task-item[data-status="executing"],
-  .mission-card-list.filter-pending .task-item[data-status="pending"],
-  .mission-card-list.filter-done .task-item[data-status="done"],
-  .mission-card-list.filter-all .task-item[data-status] {
-    /* default visible */;
-  }
   .mission-card-list.filter-executing .task-item:not([data-status="executing"]),
   .mission-card-list.filter-pending .task-item:not([data-status="pending"]),
   .mission-card-list.filter-done .task-item:not([data-status="done"]) {
@@ -851,10 +830,7 @@
        ============================================ -->
   <section class="page page-home active" id="pageHome">
 
-    <!-- ▸ Top Gradient Area (262px) -->
     <div class="top-area">
-
-      <!-- Status Bar 36px -->
       <div class="status-bar">
         <span class="time">9:41</span>
         <div class="status-icons">
@@ -871,7 +847,6 @@
         </div>
       </div>
 
-      <!-- Header 64px -->
       <div class="header">
         <span class="header-title">👋 Hi 護理師名稱</span>
         <div class="header-actions">
@@ -885,7 +860,6 @@
         </div>
       </div>
 
-      <!-- 4-Grid Quick Entry 98px -->
       <div class="quick-grid">
         <div class="grid-item">
           <img src="icons/icon-grid-medicine.svg" alt="藥品配送">
@@ -905,35 +879,25 @@
         </div>
       </div>
 
-      <!-- Section Title 48px -->
       <div class="section-title">
         <span class="left">最近的派工</span>
         <button class="right" onclick="switchPage('mission','all')">查看全部</button>
       </div>
-    </div><!-- /top-area -->
+    </div>
 
-    <!-- ▸ Scrollable Task List -->
     <div class="scroll-area">
       <div class="task-list">
-
-        <!-- 1. Completed -->
         <div class="card card-completed">
           <span class="title">藥品配送</span>
           <span class="subtitle">於 <b>10:20</b> 結束</span>
         </div>
-
-        <!-- Divider -->
         <div class="divider-row">
           <span class="line"></span>
           <span>以上是最近10分鐘內結束的派工</span>
           <span class="line"></span>
         </div>
-
-        <!-- 2. Active / In-Progress -->
         <div class="card card-active">
-          <div class="active-header">
-            <span class="title">藥品配送</span>
-          </div>
+          <div class="active-header"><span class="title">藥品配送</span></div>
           <div class="active-info">
             <div class="info-title">正在領取藥品</div>
             <div class="info-sub">護理師正在領取藥品</div>
@@ -942,22 +906,14 @@
             <div class="progress-row">
               <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
               <div class="progress-track-zone">
-                <div class="progress-track">
-                  <div class="progress-fill p50"></div>
-                </div>
+                <div class="progress-track"><div class="progress-fill p50"></div></div>
                 <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
               </div>
               <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
             </div>
-            <div class="progress-labels">
-              <span>護理站</span>
-              <span>A-2</span>
-              <span>護理站</span>
-            </div>
+            <div class="progress-labels"><span>護理站</span><span>A-2</span><span>護理站</span></div>
           </div>
         </div>
-
-        <!-- 3. Warning Card -->
         <div class="card card-warning">
           <div class="title">檢體取送</div>
           <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
@@ -969,21 +925,16 @@
             <span class="warn-text">派工異動，延後執行時間</span>
           </div>
         </div>
-
-        <!-- 4. Normal Pending -->
         <div class="card card-pending">
           <div class="title">藥品配送</div>
           <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
         </div>
-
-        <!-- 5. Normal Pending -->
         <div class="card card-pending">
           <div class="title">藥品配送</div>
           <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
         </div>
-
       </div>
-    </div><!-- /scroll-area -->
+    </div>
 
   </section><!-- /page-home -->
 
@@ -993,10 +944,7 @@
        ============================================ -->
   <section class="page page-mission" id="pageMission">
 
-    <!-- ▸ Mission Top Area -->
     <div class="mission-top-area">
-
-      <!-- Status Bar 36px -->
       <div class="status-bar">
         <span class="time">9:41</span>
         <div class="status-icons">
@@ -1013,7 +961,6 @@
         </div>
       </div>
 
-      <!-- Header 64px -->
       <div class="mission-header">
         <span class="header-title">派工列表</span>
         <div class="header-actions">
@@ -1027,7 +974,6 @@
         </div>
       </div>
 
-      <!-- Date Switcher 60px -->
       <div class="date-switcher">
         <button class="date-arrow-btn" id="btnDatePrev" onclick="changeDate(-1)" aria-label="前一天">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1045,7 +991,6 @@
         </button>
       </div>
 
-      <!-- Filter Tabs 64px -->
       <div class="filter-tabs-container">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">全部<span id="countAll">(9)</span></button>
@@ -1055,19 +1000,18 @@
         </div>
         <div class="filter-fade-right"></div>
       </div>
+    </div>
 
-    </div><!-- /mission-top-area -->
-
-    <!-- ▸ Mission Scrollable Content -->
     <div class="mission-scroll-area">
 
-      <!-- Shift Group Label -->
+      <!-- Shift Group Label: icon+label at top, subtitle-divider at bottom per Figma -->
       <div class="shift-group">
         <div class="shift-row">
           <div class="shift-icon-circle">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <circle cx="6" cy="6" r="3" fill="#ffae4b"/>
-              <path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.5 2.5l1.4 1.4M8.1 8.1l1.4 1.4M2.5 9.5l1.4-1.4M8.1 3.9l1.4-1.4" stroke="#ffae4b" stroke-width="0.8" stroke-linecap="round"/>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <!-- Sun icon from Figma Component 26/Variant4 -->
+              <circle cx="7" cy="7" r="3.5" fill="#ffae4b" stroke="#ffae4b" stroke-width="0.58"/>
+              <path d="M7 1.17v1.75M7 11.08v1.75M1.17 7h1.75M11.08 7h1.75M2.88 2.88l1.24 1.24M9.88 9.88l1.24 1.24M2.88 11.12l1.24-1.24M9.88 4.12l1.24-1.24" stroke="#ffae4b" stroke-width="1.17" stroke-linecap="round"/>
             </svg>
           </div>
           <span class="shift-label">白班</span>
@@ -1079,29 +1023,20 @@
         </div>
       </div>
 
-      <!-- Mission Card List -->
       <div class="mission-card-list filter-all" id="missionCardList">
 
-        <!-- 1. Done card -->
+        <!-- 1. Done card - per Figma: no checkmark, grey text -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
-            <div class="card-info">
-              <span class="card-title">藥品配送</span>
-              <span class="card-sub">於 10:20 結束</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
-              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <span class="card-title">藥品配送</span>
+            <span class="card-sub">於 10:20 結束</span>
           </button>
         </div>
 
-        <!-- 2. Active card - Medicine (184px) -->
+        <!-- 2. Active card - Medicine (Figma: 7:1860) -->
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（藥品配送-執行中）')">
-            <div class="active-top">
-              <span class="active-top-title">藥品配送</span>
-            </div>
+            <div class="active-top"><span class="active-top-title">藥品配送</span></div>
             <div class="active-mid">
               <div class="active-mid-title">正在領取藥品</div>
               <div class="active-mid-sub">護理師正在領取藥品</div>
@@ -1110,28 +1045,20 @@
               <div class="progress-row">
                 <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
                 <div class="progress-track-zone">
-                  <div class="progress-track">
-                    <div class="progress-fill p50"></div>
-                  </div>
+                  <div class="progress-track"><div class="progress-fill p50"></div></div>
                   <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
                 </div>
                 <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
               </div>
-              <div class="progress-labels">
-                <span>護理站</span>
-                <span>A-2</span>
-                <span>護理站</span>
-              </div>
+              <div class="progress-labels"><span>護理站</span><span>A-2</span><span>護理站</span></div>
             </div>
           </button>
         </div>
 
-        <!-- 3. Active card - Specimen (183px) -->
+        <!-- 3. Active card - Specimen (Figma: 7:1861) -->
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（檢體取送-執行中）')">
-            <div class="active-top">
-              <span class="active-top-title">檢體取送</span>
-            </div>
+            <div class="active-top"><span class="active-top-title">檢體取送</span></div>
             <div class="active-mid">
               <div class="active-mid-title">請前往 B-1 區交付檢體</div>
               <div class="active-mid-sub">請儘速前來，避免機器人超時離去</div>
@@ -1140,101 +1067,85 @@
               <div class="progress-row">
                 <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
                 <div class="progress-track-zone">
-                  <div class="progress-track">
-                    <div class="progress-fill p52"></div>
-                  </div>
+                  <div class="progress-track"><div class="progress-fill p52"></div></div>
                   <img class="progress-robot p52" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
                 </div>
                 <img class="station-icon" src="icons/icon-24px-specimen-station.svg" alt="檢體站" width="24" height="24">
               </div>
               <div class="progress-labels">
-                <span style="color:#4d5055">護理站</span>
-                <span>B-1</span>
-                <span>檢體站</span>
+                <span style="color:#4d5055">護理站</span><span>B-1</span><span>檢體站</span>
               </div>
             </div>
           </button>
         </div>
 
-        <!-- 4. Pending card -->
+        <!-- 4. Pending card - per Figma: no clock icon -->
         <div class="task-item" data-status="pending">
           <button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')">
-            <div class="card-info">
-              <span class="card-title">檢體取送</span>
-              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
-              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <span class="card-title">檢體取送</span>
+            <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
           </button>
         </div>
 
-        <!-- Shift Change Divider -->
+        <!-- Shift Change Divider (Figma: 7:1863) -->
         <div class="divider-row" style="padding: 8px 0;">
           <span class="line"></span>
           <span>因轉換班別，不執行派工記錄 (4)</span>
           <span class="line"></span>
         </div>
 
-        <!-- 5. Pending card (post-shift) -->
-        <div class="task-item" data-status="pending">
-          <button class="mission-card-pending" onclick="alert('任務詳情（環境介紹-待執行）')">
-            <div class="card-info">
-              <span class="card-title">環境介紹-帶入病室</span>
-              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
-              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+        <!-- Post-shift cards - ALL done status per Figma (grey, "無法執行派工，請自行...") -->
+
+        <!-- 5. 環境介紹 (Figma: 7:1864) -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')">
+            <span class="card-title">環境介紹-帶入病室</span>
+            <span class="card-sub">無法執行派工，請自行執行環境介紹</span>
           </button>
         </div>
 
-        <!-- 6. Pending card -->
-        <div class="task-item" data-status="pending">
-          <button class="mission-card-pending" onclick="alert('任務詳情（藥品配送-待執行）')">
-            <div class="card-info">
-              <span class="card-title">藥品配送</span>
-              <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="#9aa0a9" stroke-width="1.5" fill="none"/>
-              <path d="M12 7v5l3 3" stroke="#9aa0a9" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+        <!-- 6. 檢體取送 (Figma: 7:1865) -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')">
+            <span class="card-title">檢體取送</span>
+            <span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span>
           </button>
         </div>
 
-        <!-- Ended Section Header -->
+        <!-- 7. 藥品配送 (Figma: 7:1866) -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')">
+            <span class="card-title">藥品配送</span>
+            <span class="card-sub">無法執行派工，請自行前往護理站領藥</span>
+          </button>
+        </div>
+
+        <!-- 8. 衛教任務 (Figma: 7:1867) -->
+        <div class="task-item" data-status="done">
+          <button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')">
+            <span class="card-title">護理衛教</span>
+            <span class="card-sub">無法執行派工，請重新預約衛教</span>
+          </button>
+        </div>
+
+        <!-- Ended Section Header (Figma: 7:1882, 7:1883) -->
         <div class="ended-header">
           <span>已結束 3 項派工</span>
         </div>
 
-        <!-- 7. Done card -->
+        <!-- 9. Done card (Figma: earlier completed tasks) -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
-            <div class="card-info">
-              <span class="card-title">藥品配送</span>
-              <span class="card-sub">於 10:20 結束</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
-              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <span class="card-title">藥品配送</span>
+            <span class="card-sub">於 10:20 結束</span>
           </button>
         </div>
 
-        <!-- 8. Done card -->
+        <!-- 10. Done card -->
         <div class="task-item" data-status="done">
           <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')">
-            <div class="card-info">
-              <span class="card-title">檢體取送</span>
-              <span class="card-sub">於 10:20 結束</span>
-            </div>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#9aa0a9"/>
-              <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <span class="card-title">檢體取送</span>
+            <span class="card-sub">於 10:12 結束</span>
           </button>
         </div>
 
@@ -1248,9 +1159,7 @@
        PAGE 3: MINE (我的) - Placeholder
        ============================================ -->
   <section class="page page-mine" id="pageMine">
-
     <div class="mine-top-area">
-      <!-- Status Bar -->
       <div class="status-bar">
         <span class="time">9:41</span>
         <div class="status-icons">
@@ -1266,12 +1175,10 @@
           </svg>
         </div>
       </div>
-      <!-- Header -->
       <div class="mission-header">
         <span class="header-title">我的</span>
       </div>
     </div>
-
     <div class="mine-content">
       <div class="mine-placeholder">
         <svg class="icon-large" viewBox="0 0 64 64" fill="none">
@@ -1281,33 +1188,34 @@
         <p>個人中心敬請期待</p>
       </div>
     </div>
-
-  </section><!-- /page-mine -->
+  </section>
 
 
   <!-- ============================================
        SHARED BOTTOM AREA
        ============================================ -->
   <div class="bottom-area">
-    <!-- Navigation Bar 66px -->
     <div class="bottom-nav" id="bottomNav">
       <button class="nav-tab active" data-page="home" onclick="switchPage('home')">
-        <img src="icons/icon-32px-home-selected.svg" alt="首頁" width="32" height="32" class="tab-icon" data-icon-home-default="icons/icon-32px-home-default.svg" data-icon-home-selected="icons/icon-32px-home-selected.svg">
+        <img src="icons/icon-32px-home-selected.svg" alt="首頁" width="32" height="32" class="tab-icon"
+             data-icon-home-default="icons/icon-32px-home-default.svg"
+             data-icon-home-selected="icons/icon-32px-home-selected.svg">
         <span>首頁</span>
       </button>
       <button class="nav-tab" data-page="mission" onclick="switchPage('mission')">
-        <img src="icons/icon-32px-mission-default.svg" alt="派工列表" width="32" height="32" class="tab-icon" data-icon-mission-default="icons/icon-32px-mission-default.svg" data-icon-mission-selected="icons/icon-32px-mission-selected.svg">
+        <img src="icons/icon-32px-mission-default.svg" alt="派工列表" width="32" height="32" class="tab-icon"
+             data-icon-mission-default="icons/icon-32px-mission-default.svg"
+             data-icon-mission-selected="icons/icon-32px-mission-selected.svg">
         <span>派工列表</span>
       </button>
       <button class="nav-tab" data-page="mine" onclick="switchPage('mine')">
-        <img src="icons/icon-32px-mine-default.svg" alt="我的" width="32" height="32" class="tab-icon" data-icon-mine-default="icons/icon-32px-mine-default.svg" data-icon-mine-selected="icons/icon-32px-mine-default.svg">
+        <img src="icons/icon-32px-mine-default.svg" alt="我的" width="32" height="32" class="tab-icon"
+             data-icon-mine-default="icons/icon-32px-mine-default.svg"
+             data-icon-mine-selected="icons/icon-32px-mine-default.svg">
         <span>我的</span>
       </button>
     </div>
-    <!-- Home Indicator 34px -->
-    <div class="home-indicator">
-      <div class="bar"></div>
-    </div>
+    <div class="home-indicator"><div class="bar"></div></div>
   </div>
 
 </div><!-- /phone-frame -->
@@ -1319,19 +1227,19 @@
 <script>
   // ── State ──
   const TODAY = new Date();
+  const MAX_PAST_DAYS = 7;  // ±7 days limit per requirement
   const state = {
     currentPage: 'home',
-    missionDate: new Date(),       // date currently viewed on mission page
-    missionFilter: 'all',         // 'all' | 'pending' | 'executing' | 'done'
-    defaultFilter: 'all'          // filter to apply when switching to mission
+    missionDate: new Date(),
+    missionFilter: 'all',
+    defaultFilter: 'all'
   };
 
   // ── Weekday helper ──
   const WEEKDAYS = ['日','一','二','三','四','五','六'];
 
   function formatDate(d) {
-    const now = new Date();
-    const isToday = d.toDateString() === now.toDateString();
+    const isToday = d.toDateString() === TODAY.toDateString();
     const m = d.getMonth() + 1;
     const day = d.getDate();
     const wd = WEEKDAYS[d.getDay()];
@@ -1342,9 +1250,13 @@
     };
   }
 
+  function getDaysDiff(d1, d2) {
+    const ms = d1.getTime() - d2.getTime();
+    return Math.floor(ms / (1000 * 60 * 60 * 24));
+  }
+
   // ── Page Switching ──
   function switchPage(pageName, defaultFilter) {
-    // Update state
     state.currentPage = pageName;
     if (defaultFilter) {
       state.missionFilter = defaultFilter;
@@ -1353,25 +1265,26 @@
 
     // Toggle page visibility
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const targetPage = document.getElementById('page' + pageName.charAt(0).toUpperCase() + pageName.slice(1));
+    var pageId = 'page' + pageName.charAt(0).toUpperCase() + pageName.slice(1);
+    var targetPage = document.getElementById(pageId);
     if (targetPage) targetPage.classList.add('active');
 
     // Update bottom nav tabs
-    const tabs = document.querySelectorAll('#bottomNav .nav-tab');
-    tabs.forEach(tab => {
-      const isActive = tab.dataset.page === pageName;
+    var tabs = document.querySelectorAll('#bottomNav .nav-tab');
+    tabs.forEach(function(tab) {
+      var isActive = tab.dataset.page === pageName;
       tab.classList.toggle('active', isActive);
-      // Update icon
-      const icon = tab.querySelector('.tab-icon');
+      var icon = tab.querySelector('.tab-icon');
       if (icon) {
-        const iconKey = tab.dataset.page;
-        const defaultSrc = icon.dataset['icon' + iconKey.charAt(0).toUpperCase() + iconKey.slice(1) + 'Default'];
-        const selectedSrc = icon.dataset['icon' + iconKey.charAt(0).toUpperCase() + iconKey.slice(1) + 'Selected'];
+        var iconKey = tab.dataset.page;
+        var capKey = iconKey.charAt(0).toUpperCase() + iconKey.slice(1);
+        var defaultSrc = icon.dataset['icon' + capKey + 'Default'];
+        var selectedSrc = icon.dataset['icon' + capKey + 'Selected'];
         icon.src = isActive ? selectedSrc : defaultSrc;
       }
     });
 
-    // If switching to mission page, sync filter state
+    // Sync mission filter state when switching to mission
     if (pageName === 'mission') {
       syncMissionFilter();
       updateDateDisplay();
@@ -1379,13 +1292,16 @@
     }
   }
 
-  // ── Mission: Date Navigation ──
+  // ── Mission: Date Navigation (±7 days) ──
   function changeDate(delta) {
-    const newDate = new Date(state.missionDate);
+    var newDate = new Date(state.missionDate);
     newDate.setDate(newDate.getDate() + delta);
 
     // Can't go past today
     if (newDate > TODAY) return;
+    // Can't go more than 7 days back
+    var daysBack = getDaysDiff(TODAY, newDate);
+    if (daysBack > MAX_PAST_DAYS) return;
 
     state.missionDate = newDate;
     updateDateDisplay();
@@ -1393,31 +1309,34 @@
   }
 
   function updateDateDisplay() {
-    const display = document.getElementById('dateDisplay');
+    var display = document.getElementById('dateDisplay');
     if (!display) return;
-    const fmt = formatDate(state.missionDate);
+    var fmt = formatDate(state.missionDate);
     display.querySelector('.date-label').textContent = fmt.label;
     display.querySelector('.date-detail').textContent = fmt.detail;
   }
 
   function updateDateArrowState() {
-    const btnNext = document.getElementById('btnDateNext');
-    if (!btnNext) return;
-    const isToday = state.missionDate.toDateString() === TODAY.toDateString();
+    var btnNext = document.getElementById('btnDateNext');
+    var btnPrev = document.getElementById('btnDatePrev');
+    if (!btnNext || !btnPrev) return;
+
+    var isToday = state.missionDate.toDateString() === TODAY.toDateString();
     btnNext.disabled = isToday;
+
+    var daysBack = getDaysDiff(TODAY, state.missionDate);
+    btnPrev.disabled = daysBack >= MAX_PAST_DAYS;
   }
 
   // ── Mission: Filter Tabs ──
   function setFilter(filterName) {
     state.missionFilter = filterName;
 
-    // Update tab active states
-    document.querySelectorAll('#filterTabs .filter-tab').forEach(tab => {
+    document.querySelectorAll('#filterTabs .filter-tab').forEach(function(tab) {
       tab.classList.toggle('active', tab.dataset.filter === filterName);
     });
 
-    // Update card list filter class
-    const cardList = document.getElementById('missionCardList');
+    var cardList = document.getElementById('missionCardList');
     if (cardList) {
       cardList.className = 'mission-card-list filter-' + filterName;
     }
@@ -1428,7 +1347,7 @@
   }
 
   // ── Init ──
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function() {
     updateDateDisplay();
     updateDateArrowState();
   });

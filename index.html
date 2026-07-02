@@ -31,28 +31,21 @@
 
   body {
     font-family: 'HarmonyOS Sans TC', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', sans-serif;
-    background: #e8ecf1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
     min-height: 100dvh;
   }
 
   /* ── Phone Frame ── */
   .phone-frame {
     width: 100vw;
-    max-width: 375px;
     height: 100dvh;
     background: var(--bg);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
-  }
-  @media (max-width: 375px) {
-    .phone-frame {
-      max-width: none;
-    }
   }
 
   /* ── SPA Page System ── */

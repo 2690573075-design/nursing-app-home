@@ -25,9 +25,16 @@
     --filter-inactive-text: #4d5055;
     --shift-sun: #ffae4b;
     --divider-line: #888888;
+    /* Responsive: base width 375px, all sizes scale with viewport */
+    --vw: calc(100vw / 375);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     font-family: 'HarmonyOS Sans TC', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', sans-serif;
@@ -37,15 +44,15 @@
     min-height: 100dvh;
   }
 
-  /* ── Phone Frame ── */
   .phone-frame {
-    width: 100vw;
+    width: 100%;
     height: 100dvh;
     background: var(--bg);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
+    font-size: calc(16 * var(--vw));
   }
 
   /* ── SPA Page System ── */
@@ -55,126 +62,92 @@
     flex: 1;
     overflow: hidden;
   }
-  .page.active {
-    display: flex;
-  }
+  .page.active { display: flex; }
 
   /* =============================================
      PAGE 1: HOME (首頁)
      ============================================= */
-
-  /* ── Top Gradient Area (262px) ── */
   .top-area {
     flex-shrink: 0;
     background: linear-gradient(0deg, var(--gradient-top) 0%, var(--gradient-bottom) 100%);
     z-index: 2;
   }
 
-  /* Header - 64px */
   .header {
-    height: 64px;
-    padding: 12px 16px;
+    padding: 0.75em 1em;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 1em;
   }
   .header-title {
     flex: 1;
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: 700;
     color: var(--text-primary);
-    line-height: 1.5em;
+    line-height: 1.5;
   }
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.75em;
   }
   .icon-btn {
-    width: 44px;
-    height: 40px;
+    width: 2.75em;
+    height: 2.5em;
     background: var(--card-white);
-    border-radius: 12px;
+    border-radius: 0.75em;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 0.5em;
     position: relative;
     cursor: pointer;
     border: none;
-    box-shadow: 0px 2px 6px 0px rgba(30, 119, 202, 0.06);
+    box-shadow: 0 0.125em 0.375em rgba(30, 119, 202, 0.06);
   }
-  .icon-btn img {
-    display: block;
-  }
+  .icon-btn img { display: block; width: 1.5em; height: 1.5em; }
   .red-dot {
     position: absolute;
-    top: -1px;
-    right: -1px;
-    width: 8px;
-    height: 8px;
+    top: -0.0625em; right: -0.0625em;
+    width: 0.5em; height: 0.5em;
     background: var(--red-dot);
     border-radius: 50%;
   }
 
-  /* 4-Grid Quick Entry - 98px */
   .quick-grid {
-    height: 98px;
-    padding: 0 16px;
+    padding: 0 1em;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 0.5em;
   }
   .grid-item {
-    width: 80px;
-    height: 98px;
+    flex: 1;
+    max-width: 7em;
+    aspect-ratio: 0.82;
     background: var(--card-white);
-    border-radius: 16px;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.5em;
     cursor: pointer;
     border: none;
-    box-shadow: 0px 2px 6px 0px rgba(30, 119, 202, 0.06);
+    box-shadow: 0 0.125em 0.375em rgba(30, 119, 202, 0.06);
   }
-  .grid-item img {
-    width: 40px;
-    height: 40px;
-  }
-  .grid-item span {
-    font-size: 14px;
-    font-weight: 500;
-    color: #444444;
-    line-height: 1.3em;
-  }
+  .grid-item img { width: 2.5em; height: 2.5em; }
+  .grid-item span { font-size: 0.875em; font-weight: 500; color: #444; line-height: 1.3; }
 
-  /* Section Title - 48px */
   .section-title {
-    height: 48px;
-    padding: 16px 16px 8px;
+    padding: 1em 1em 0.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .section-title .left {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
-  .section-title .right {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--blue);
-    line-height: 22px;
-    cursor: pointer;
-    border: none;
-    background: none;
-  }
+  .section-title .left { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+  .section-title .right { font-size: 0.875em; font-weight: 500; color: var(--blue); line-height: 1.5; cursor: pointer; border: none; background: none; }
 
-  /* ── Scrollable Task List ── */
   .scroll-area {
     flex: 1;
     overflow-y: auto;
@@ -182,605 +155,212 @@
     background: var(--bg);
   }
   .task-list {
-    padding: 0 15px;
+    padding: 0 0.9375em;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-bottom: 8px;
+    gap: 1em;
+    padding-bottom: 0.5em;
   }
 
-  /* Card Shared */
   .card {
     background: var(--card-white);
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
+    border-radius: 1em;
+    padding: 1em;
+    box-shadow: 0 0.125em 0.3125em rgba(140, 157, 173, 0.1);
   }
 
-  /* Completed task */
-  .card-completed {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .card-completed .title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gray-done);
-    line-height: 24px;
-  }
-  .card-completed .subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--gray-done);
-    line-height: 22px;
-  }
-  .card-completed .subtitle b {
-    font-weight: 700;
-  }
+  .card-completed { display: flex; flex-direction: column; gap: 0.5em; }
+  .card-completed .title { font-size: 1em; font-weight: 700; color: var(--gray-done); line-height: 1.5; }
+  .card-completed .subtitle { font-size: 0.875em; font-weight: 400; color: var(--gray-done); line-height: 1.5; }
+  .card-completed .subtitle b { font-weight: 700; }
 
-  /* Divider */
-  .divider-row {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .divider-row .line {
-    flex: 1;
-    height: 0;
-    border-top: 1px solid #888888;
-  }
-  .divider-row span {
-    font-size: 12px;
-    font-weight: 400;
-    color: #333333;
-    white-space: nowrap;
-  }
+  .divider-row { display: flex; align-items: center; gap: 0.25em; }
+  .divider-row .line { flex: 1; height: 0; border-top: 1px solid #888; }
+  .divider-row span { font-size: 0.75em; font-weight: 400; color: #333; white-space: nowrap; }
 
-  /* Active/In-progress card */
-  .card-active {
-    padding: 0;
-    overflow: hidden;
-  }
+  .card-active { padding: 0; overflow: hidden; }
   .card-active .active-header {
-    height: 44px;
+    height: 2.75em;
     background: var(--blue-active);
-    border-radius: 16px 16px 0 0;
-    padding: 12px 16px 8px;
-    display: flex;
-    align-items: center;
+    border-radius: 1em 1em 0 0;
+    padding: 0.75em 1em 0.5em;
+    display: flex; align-items: center;
   }
-  .card-active .active-header .title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 24px;
-  }
-  .card-active .active-info {
-    padding: 8px 12px 12px;
-    border-bottom: 1px solid #DDE5EF;
-  }
-  .card-active .active-info .info-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
-  .card-active .active-info .info-sub {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 22px;
-    margin-top: 4px;
-  }
-  .card-active .progress-section {
-    padding: 12px;
-    border-radius: 0 0 16px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .progress-row {
-    display: flex;
-    align-items: flex-end;
-    height: 28px;
-  }
-  .progress-row .station-icon {
-    flex-shrink: 0;
-  }
-  .progress-track-zone {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 24px;
-  }
-  .progress-track {
-    width: 100%;
-    height: 8px;
-    background: var(--progress-track);
-    border-radius: 9px;
-    position: relative;
-    overflow: visible;
-  }
-  .progress-fill {
-    height: 8px;
-    background: var(--progress-fill);
-    border-radius: 9px;
-  }
+  .card-active .active-header .title { font-size: 1em; font-weight: 700; color: #fff; line-height: 1.5; }
+  .card-active .active-info { padding: 0.5em 0.75em 0.75em; border-bottom: 1px solid #DDE5EF; }
+  .card-active .active-info .info-title { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+  .card-active .active-info .info-sub { font-size: 0.875em; font-weight: 400; color: var(--text-primary); line-height: 1.5; margin-top: 0.25em; }
+  .card-active .progress-section { padding: 0.75em; border-radius: 0 0 1em 1em; display: flex; flex-direction: column; gap: 0.25em; }
+  .progress-row { display: flex; align-items: flex-end; height: 1.75em; }
+  .progress-row .station-icon { flex-shrink: 0; width: 1.5em; height: 1.5em; }
+  .progress-track-zone { flex: 1; display: flex; align-items: center; position: relative; height: 1.5em; }
+  .progress-track { width: 100%; height: 0.5em; background: var(--progress-track); border-radius: 0.5625em; position: relative; overflow: visible; }
+  .progress-fill { height: 0.5em; background: var(--progress-fill); border-radius: 0.5625em; }
   .progress-fill.p50 { width: 50%; }
   .progress-fill.p52 { width: 52%; }
-  .progress-robot {
-    position: absolute;
-    top: 2px;
-    z-index: 2;
-  }
-  .progress-robot.p50 { left: calc(50% - 12px); }
-  .progress-robot.p52 { left: calc(52% - 12px); }
-  .progress-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 12px;
-  }
-  .progress-labels span {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 1.5em;
-  }
+  .progress-robot { position: absolute; top: 0.125em; z-index: 2; width: 1.5em; height: 1.5em; }
+  .progress-robot.p50 { left: calc(50% - 0.75em); }
+  .progress-robot.p52 { left: calc(52% - 0.75em); }
+  .progress-labels { display: flex; justify-content: space-between; padding: 0 0.75em; }
+  .progress-labels span { font-size: 0.75em; font-weight: 400; color: var(--text-primary); line-height: 1.5; }
 
-  /* Warning card */
-  .card-warning {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .card-warning .title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
-  .card-warning .subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-secondary);
-    line-height: 22px;
-  }
-  .warning-banner {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px;
-    background: var(--warning-bg);
-    border-radius: 8px;
-  }
-  .warning-banner .warn-text {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--warning-orange);
-    line-height: 22px;
-  }
+  .card-warning { display: flex; flex-direction: column; gap: 0.5em; }
+  .card-warning .title { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+  .card-warning .subtitle { font-size: 0.875em; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+  .warning-banner { display: flex; align-items: center; gap: 0.5em; padding: 0.5em; background: var(--warning-bg); border-radius: 0.5em; }
+  .warning-banner .warn-text { font-size: 0.875em; font-weight: 500; color: var(--warning-orange); line-height: 1.5; }
 
-  /* Pending task card */
-  .card-pending {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .card-pending .title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    line-height: 24px;
-  }
-  .card-pending .subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-secondary);
-    line-height: 22px;
-  }
+  .card-pending { display: flex; flex-direction: column; gap: 0.5em; }
+  .card-pending .title { font-size: 1em; font-weight: 700; color: var(--text-secondary); line-height: 1.5; }
+  .card-pending .subtitle { font-size: 0.875em; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
 
   /* =============================================
      PAGE 2: MISSION LIST (派工列表)
      ============================================= */
-
-  .page-mission {
-    background: var(--bg);
-  }
-
-  /* Mission Header Area */
-  .mission-top-area {
-    flex-shrink: 0;
-    background: var(--header-bg);
-    z-index: 2;
-  }
-  /* Mission Header - 64px (matches home header) */
+  .page-mission { background: var(--bg); }
+  .mission-top-area { flex-shrink: 0; background: var(--header-bg); z-index: 2; }
   .mission-header {
-    height: 64px;
-    padding: 12px 16px;
+    padding: 0.75em 1em;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 1em;
   }
-  .mission-header .header-title {
-    flex: 1;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.5em;
-  }
+  .mission-header .header-title { flex: 1; font-size: 1.5em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
 
-  /* Date Switcher - 60px */
   .date-switcher {
-    height: 60px;
-    padding: 10px 16px;
+    padding: 0.625em 1em;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: var(--header-bg);
   }
   .date-arrow-btn {
-    width: 40px;
-    height: 40px;
+    width: 2.5em; height: 2.5em;
     background: var(--card-white);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    flex-shrink: 0;
+    border-radius: 0.75em;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none; flex-shrink: 0;
   }
-  .date-arrow-btn:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-  }
-  .date-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-  .date-display .date-label {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
-  .date-display .date-detail {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 22px;
-  }
+  .date-arrow-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .date-display { display: flex; flex-direction: column; align-items: center; gap: 0.125em; }
+  .date-display .date-label { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+  .date-display .date-detail { font-size: 0.875em; font-weight: 400; color: var(--text-primary); line-height: 1.375; }
 
-  /* Filter Tabs - 64px */
-  .filter-tabs-container {
-    height: 64px;
-    padding: 16px;
-    background: var(--header-bg);
-    position: relative;
-    overflow: hidden;
-  }
-  .filter-tabs {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-right: 24px;
-  }
+  .filter-tabs-container { padding: 1em; background: var(--header-bg); position: relative; overflow: hidden; }
+  .filter-tabs { display: flex; gap: 0.5em; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-right: 1.5em; }
   .filter-tabs::-webkit-scrollbar { display: none; }
   .filter-tab {
-    height: 32px;
-    padding: 0 16px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 32px;
-    color: var(--filter-inactive-text);
-    background: var(--card-white);
-    white-space: nowrap;
-    cursor: pointer;
-    border: none;
-    flex-shrink: 0;
+    height: 2em; padding: 0 1em; border-radius: 0.5em;
+    font-size: 0.875em; font-weight: 400; line-height: 2em;
+    color: var(--filter-inactive-text); background: var(--card-white);
+    white-space: nowrap; cursor: pointer; border: none; flex-shrink: 0;
   }
-  .filter-tab.active {
-    background: var(--blue);
-    color: #ffffff;
-    font-weight: 500;
-  }
+  .filter-tab.active { background: var(--blue); color: #fff; font-weight: 500; }
   .filter-fade-right {
-    position: absolute;
-    right: 0;
-    top: 16px;
-    width: 32px;
-    height: 32px;
+    position: absolute; right: 0; top: 1em; width: 2em; height: 2em;
     background: linear-gradient(90deg, transparent 0%, var(--header-bg) 100%);
     pointer-events: none;
   }
 
-  /* ── Mission Scroll Area ── */
-  .mission-scroll-area {
-    flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: var(--bg);
-    padding: 0 16px;
-  }
+  .mission-scroll-area { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--bg); padding: 0 1em; }
 
-  /* Shift Group Label - 44px.  Label at top, subtitle-divider at bottom */
   .shift-group {
-    height: 44px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
+    margin-top: 1em;
+    display: flex; flex-direction: column;
+    justify-content: space-between; align-items: center;
+    gap: 0.5em;
   }
-  .shift-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .shift-subtitle-row {
-    width: 100%;
-  }
+  .shift-row { display: flex; align-items: center; gap: 0.5em; }
   .shift-icon-circle {
-    width: 20px;
-    height: 20px;
-    background: var(--card-white);
-    border-radius: 99px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    width: 1.25em; height: 1.25em;
+    background: var(--card-white); border-radius: 99em;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .shift-label {
-    font-size: 14px;
-    font-weight: 700;
-    color: #333333;
-    line-height: 22px;
-  }
-  .shift-subtitle-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .shift-subtitle-row .sub-line {
-    flex: 1;
-    height: 0;
-    border-top: 1px solid #888888;
-  }
-  .shift-subtitle-row span {
-    font-size: 12px;
-    font-weight: 400;
-    color: #333333;
-    white-space: nowrap;
-    line-height: 14px;
-  }
+  .shift-icon-circle img, .shift-icon-circle svg { width: 0.875em; height: 0.875em; }
+  .shift-label { font-size: 0.875em; font-weight: 700; color: #333; line-height: 1.375; }
+  .shift-subtitle-row { width: 100%; display: flex; align-items: center; gap: 0.5em; }
+  .shift-subtitle-row .sub-line { flex: 1; height: 0; border-top: 1px solid #888; }
+  .shift-subtitle-row span { font-size: 0.75em; font-weight: 400; color: #333; white-space: nowrap; line-height: 0.875; }
 
-  /* Mission Card List */
-  .mission-card-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-top: 12px;
-    padding-bottom: 16px;
-  }
+  .mission-card-list { display: flex; flex-direction: column; gap: 1em; padding-top: 0.75em; padding-bottom: 1em; }
 
-  /* Done card (grey, 86px) - no checkmark per Figma */
   .mission-card-done {
-    background: var(--card-white);
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    text-align: left;
+    background: var(--card-white); border-radius: 1em; padding: 1em;
+    display: flex; flex-direction: column; gap: 0.25em;
+    box-shadow: 0 0.125em 0.3125em rgba(140, 157, 173, 0.1);
+    cursor: pointer; border: none; width: 100%; text-align: left;
   }
-  .mission-card-done .card-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gray-done);
-    line-height: 24px;
-  }
-  .mission-card-done .card-sub {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--gray-done);
-    line-height: 22px;
-  }
+  .mission-card-done .card-title { font-size: 1em; font-weight: 700; color: var(--gray-done); line-height: 1.5; }
+  .mission-card-done .card-sub { font-size: 0.875em; font-weight: 400; color: var(--gray-done); line-height: 1.375; }
 
-  /* Mission active card (blue header) */
   .mission-card-active {
-    background: var(--card-white);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    text-align: left;
+    background: var(--card-white); border-radius: 1em; overflow: hidden;
+    box-shadow: 0 0.125em 0.3125em rgba(140, 157, 173, 0.1);
+    cursor: pointer; border: none; width: 100%; text-align: left;
   }
   .mission-card-active .active-top {
-    height: 44px;
-    background: var(--blue-active);
-    padding: 12px 16px 8px;
-    display: flex;
-    align-items: center;
+    height: 2.75em; background: var(--blue-active);
+    padding: 0.75em 1em 0.5em; display: flex; align-items: center;
   }
-  .mission-card-active .active-top .active-top-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 24px;
-  }
-  .mission-card-active .active-mid {
-    padding: 8px 12px 12px;
-    border-bottom: 1px solid #DDE5EF;
-  }
-  .mission-card-active .active-mid .active-mid-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
-  .mission-card-active .active-mid .active-mid-sub {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 22px;
-    margin-top: 4px;
-  }
-  .mission-card-active .active-progress {
-    padding: 12px;
-  }
+  .mission-card-active .active-top .active-top-title { font-size: 1em; font-weight: 700; color: #fff; line-height: 1.5; }
+  .mission-card-active .active-mid { padding: 0.5em 0.75em 0.75em; border-bottom: 1px solid #DDE5EF; }
+  .mission-card-active .active-mid .active-mid-title { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+  .mission-card-active .active-mid .active-mid-sub { font-size: 0.875em; font-weight: 400; color: var(--text-primary); line-height: 1.375; margin-top: 0.25em; }
+  .mission-card-active .active-progress { padding: 0.75em; }
 
-  /* Mission pending card (86px) - no clock icon per Figma */
   .mission-card-pending {
-    background: var(--card-white);
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    box-shadow: 0px 2px 5px 0px rgba(140, 157, 173, 0.1);
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    text-align: left;
+    background: var(--card-white); border-radius: 1em; padding: 1em;
+    display: flex; flex-direction: column; gap: 0.25em;
+    box-shadow: 0 0.125em 0.3125em rgba(140, 157, 173, 0.1);
+    cursor: pointer; border: none; width: 100%; text-align: left;
   }
-  .mission-card-pending .card-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    line-height: 24px;
-  }
-  .mission-card-pending .card-sub {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-secondary);
-    line-height: 22px;
-  }
+  .mission-card-pending .card-title { font-size: 1em; font-weight: 700; color: var(--text-secondary); line-height: 1.5; }
+  .mission-card-pending .card-sub { font-size: 0.875em; font-weight: 400; color: var(--text-secondary); line-height: 1.375; }
 
-  /* Ended section header - 48px (from Figma: y=-183, h=48, text at y=-167) */
   .ended-header {
-    height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 16px 0 8px;
-    background: var(--bg);
+    display: flex; align-items: center;
+    padding: 1em 0 0.5em; background: var(--bg);
   }
-  .ended-header span {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 24px;
-  }
+  .ended-header span { font-size: 1em; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
 
   /* =============================================
-     PAGE 3: MINE (我的) - Placeholder
+     PAGE 3: MINE (我的)
      ============================================= */
-  .page-mine {
-    background: var(--bg);
-  }
-  .mine-top-area {
-    flex-shrink: 0;
-    background: var(--header-bg);
-    z-index: 2;
-  }
-  .mine-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg);
-  }
-  .mine-placeholder {
-    text-align: center;
-    color: var(--gray-done);
-  }
-  .mine-placeholder .icon-large {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 16px;
-    opacity: 0.4;
-  }
-  .mine-placeholder p {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-  }
+  .page-mine { background: var(--bg); }
+  .mine-top-area { flex-shrink: 0; background: var(--header-bg); z-index: 2; }
+  .mine-content { flex: 1; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+  .mine-placeholder { text-align: center; color: var(--gray-done); }
+  .mine-placeholder .icon-large { width: 4em; height: 4em; margin-bottom: 1em; opacity: 0.4; }
+  .mine-placeholder p { font-size: 1em; font-weight: 500; line-height: 1.5; }
 
   /* =============================================
      SHARED BOTTOM AREA
      ============================================= */
-
-  /* ── Bottom Area ── */
-  .bottom-area {
-    flex-shrink: 0;
-    z-index: 10;
-    position: sticky;
-    bottom: 0;
-  }
-
-  /* Bottom Nav - 66px */
+  .bottom-area { flex-shrink: 0; z-index: 10; }
   .bottom-nav {
-    height: 66px;
     background: var(--card-white);
     border-top: 1px solid #E0E4EB;
     display: flex;
+    padding: 0.5em 0;
   }
   .nav-tab {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 8px;
-    cursor: pointer;
-    border: none;
-    background: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.25em; padding: 0.5em;
+    cursor: pointer; border: none; background: none;
   }
-  .nav-tab img {
-    width: 32px;
-    height: 32px;
-    display: block;
-  }
-  .nav-tab span {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--text-secondary);
-  }
-  .nav-tab.active span {
-    color: var(--blue);
-    font-weight: 500;
-  }
+  .nav-tab img { width: 2em; height: 2em; display: block; }
+  .nav-tab span { font-size: 0.75em; font-weight: 400; color: var(--text-secondary); }
+  .nav-tab.active span { color: var(--blue); font-weight: 500; }
 
   /* ── Filter visibility ── */
   .task-item.shift-divider { display: block; }
   .mission-card-list.filter-executing .task-item:not([data-status="executing"]),
   .mission-card-list.filter-pending .task-item:not([data-status="pending"]),
-  .mission-card-list.filter-done .task-item:not([data-status="done"]):not([data-status="done-shift"]) {
-    display: none;
-  }
-  .mission-card-list.filter-all .task-item {
-    display: block;
-  }
-  /* Post-shift cards hidden in "pending" and "executing" filters */
+  .mission-card-list.filter-done .task-item:not([data-status="done"]):not([data-status="done-shift"]) { display: none; }
+  .mission-card-list.filter-all .task-item { display: block; }
   .mission-card-list.filter-pending .task-item[data-status="done-shift"],
-  .mission-card-list.filter-executing .task-item[data-status="done-shift"] {
-    display: none;
-  }
-
+  .mission-card-list.filter-executing .task-item[data-status="done-shift"] { display: none; }
 </style>
 </head>
 <body>
@@ -791,38 +371,20 @@
        PAGE 1: HOME (首頁)
        ============================================ -->
   <section class="page page-home active" id="pageHome">
-
     <div class="top-area">
       <div class="header">
         <span class="header-title">👋 Hi 護理師名稱</span>
         <div class="header-actions">
-          <button class="icon-btn">
-            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
-          </button>
-          <button class="icon-btn">
-            <img src="icons/icon-24px-message.svg" alt="消息" width="24" height="24">
-            <span class="red-dot"></span>
-          </button>
+          <button class="icon-btn"><img src="icons/icon-24px-scan.svg" alt="掃碼"></button>
+          <button class="icon-btn"><img src="icons/icon-24px-message.svg" alt="消息"><span class="red-dot"></span></button>
         </div>
       </div>
 
       <div class="quick-grid">
-        <div class="grid-item">
-          <img src="icons/icon-grid-medicine.svg" alt="藥品配送">
-          <span>藥品配送</span>
-        </div>
-        <div class="grid-item">
-          <img src="icons/icon-grid-specimen.svg" alt="檢體取送">
-          <span>檢體取送</span>
-        </div>
-        <div class="grid-item">
-          <img src="icons/icon-grid-health-edu.svg" alt="護理衛教">
-          <span>護理衛教</span>
-        </div>
-        <div class="grid-item">
-          <img src="icons/icon-grid-environment.svg" alt="環境介紹">
-          <span>環境介紹</span>
-        </div>
+        <div class="grid-item"><img src="icons/icon-grid-medicine.svg" alt="藥品配送"><span>藥品配送</span></div>
+        <div class="grid-item"><img src="icons/icon-grid-specimen.svg" alt="檢體取送"><span>檢體取送</span></div>
+        <div class="grid-item"><img src="icons/icon-grid-health-edu.svg" alt="護理衛教"><span>護理衛教</span></div>
+        <div class="grid-item"><img src="icons/icon-grid-environment.svg" alt="環境介紹"><span>環境介紹</span></div>
       </div>
 
       <div class="section-title">
@@ -833,85 +395,51 @@
 
     <div class="scroll-area">
       <div class="task-list">
-        <div class="card card-completed">
-          <span class="title">藥品配送</span>
-          <span class="subtitle">於 <b>10:20</b> 結束</span>
-        </div>
-        <div class="divider-row">
-          <span class="line"></span>
-          <span>以上是最近10分鐘內結束的派工</span>
-          <span class="line"></span>
-        </div>
+        <div class="card card-completed"><span class="title">藥品配送</span><span class="subtitle">於 <b>10:20</b> 結束</span></div>
+        <div class="divider-row"><span class="line"></span><span>以上是最近10分鐘內結束的派工</span><span class="line"></span></div>
         <div class="card card-active">
           <div class="active-header"><span class="title">藥品配送</span></div>
-          <div class="active-info">
-            <div class="info-title">正在領取藥品</div>
-            <div class="info-sub">護理師正在領取藥品</div>
-          </div>
+          <div class="active-info"><div class="info-title">正在領取藥品</div><div class="info-sub">護理師正在領取藥品</div></div>
           <div class="progress-section">
             <div class="progress-row">
-              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站">
               <div class="progress-track-zone">
                 <div class="progress-track"><div class="progress-fill p50"></div></div>
-                <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
+                <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人">
               </div>
-              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+              <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站">
             </div>
             <div class="progress-labels"><span>護理站</span><span>A-2</span><span>護理站</span></div>
           </div>
         </div>
         <div class="card card-warning">
-          <div class="title">檢體取送</div>
-          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
+          <div class="title">檢體取送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
           <div class="warning-banner">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="9" stroke="#ee913e" stroke-width="1.5"/>
-              <path d="M10 6v5M10 13.5v.5" stroke="#ee913e" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#ee913e" stroke-width="1.5"/><path d="M10 6v5M10 13.5v.5" stroke="#ee913e" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="warn-text">派工異動，延後執行時間</span>
           </div>
         </div>
-        <div class="card card-pending">
-          <div class="title">藥品配送</div>
-          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
-        </div>
-        <div class="card card-pending">
-          <div class="title">藥品配送</div>
-          <div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
-        </div>
+        <div class="card card-pending"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
+        <div class="card card-pending"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
       </div>
     </div>
-
   </section><!-- /page-home -->
-
 
   <!-- ============================================
        PAGE 2: MISSION LIST (派工列表)
        ============================================ -->
   <section class="page page-mission" id="pageMission">
-
     <div class="mission-top-area">
-      <div class="mission-header">
-        <span class="header-title">派工列表</span>
-      </div>
-
+      <div class="mission-header"><span class="header-title">派工列表</span></div>
       <div class="date-switcher">
         <button class="date-arrow-btn" id="btnDatePrev" onclick="changeDate(-1)" aria-label="前一天">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M12.5 15L7.5 10L12.5 5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="date-display" id="dateDisplay">
-          <span class="date-label">今日</span>
-          <span class="date-detail">10/31（四）</span>
-        </div>
+        <div class="date-display" id="dateDisplay"><span class="date-label">今日</span><span class="date-detail">10/31（四）</span></div>
         <button class="date-arrow-btn" id="btnDateNext" onclick="changeDate(1)" aria-label="後一天">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M7.5 15L12.5 10L7.5 5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15L12.5 10L7.5 5" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-
       <div class="filter-tabs-container">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">全部<span id="countAll">(9)</span></button>
@@ -924,357 +452,157 @@
     </div>
 
     <div class="mission-scroll-area">
-
-      <!-- Shift Group Label: icon+label at top, subtitle-divider at bottom per Figma -->
       <div class="shift-group">
         <div class="shift-row">
           <div class="shift-icon-circle">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.99967 10.7917C9.09375 10.7917 10.7913 9.09412 10.7913 7.00004C10.7913 4.90596 9.09375 3.20837 6.99967 3.20837C4.9056 3.20837 3.20801 4.90596 3.20801 7.00004C3.20801 9.09412 4.9056 10.7917 6.99967 10.7917Z" fill="#FFAE4B" stroke="#FFAE4B" stroke-width="1.16667" stroke-linejoin="round"/>
-              <path d="M6.99967 1.74996C7.40238 1.74996 7.72884 1.4235 7.72884 1.02079C7.72884 0.618086 7.40238 0.291626 6.99967 0.291626C6.59697 0.291626 6.27051 0.618086 6.27051 1.02079C6.27051 1.4235 6.59697 1.74996 6.99967 1.74996Z" fill="#FFAE4B"/>
-              <path d="M11.2292 3.50001C11.6319 3.50001 11.9583 3.17354 11.9583 2.77084C11.9583 2.36813 11.6319 2.04167 11.2292 2.04167C10.8265 2.04167 10.5 2.36813 10.5 2.77084C10.5 3.17354 10.8265 3.50001 11.2292 3.50001Z" fill="#FFAE4B"/>
-              <path d="M12.9792 7.72916C13.3819 7.72916 13.7083 7.4027 13.7083 6.99999C13.7083 6.59729 13.3819 6.27083 12.9792 6.27083C12.5765 6.27083 12.25 6.59729 12.25 6.99999C12.25 7.4027 12.5765 7.72916 12.9792 7.72916Z" fill="#FFAE4B"/>
-              <path d="M11.2292 11.9583C11.6319 11.9583 11.9583 11.6319 11.9583 11.2292C11.9583 10.8265 11.6319 10.5 11.2292 10.5C10.8265 10.5 10.5 10.8265 10.5 11.2292C10.5 11.6319 10.8265 11.9583 11.2292 11.9583Z" fill="#FFAE4B"/>
-              <path d="M6.99967 13.7083C7.40238 13.7083 7.72884 13.3819 7.72884 12.9792C7.72884 12.5765 7.40238 12.25 6.99967 12.25C6.59697 12.25 6.27051 12.5765 6.27051 12.9792C6.27051 13.3819 6.59697 13.7083 6.99967 13.7083Z" fill="#FFAE4B"/>
-              <path d="M2.77116 11.9583C3.17386 11.9583 3.50033 11.6319 3.50033 11.2292C3.50033 10.8265 3.17386 10.5 2.77116 10.5C2.36845 10.5 2.04199 10.8265 2.04199 11.2292C2.04199 11.6319 2.36845 11.9583 2.77116 11.9583Z" fill="#FFAE4B"/>
-              <path d="M1.02116 7.72921C1.42387 7.72921 1.75033 7.40274 1.75033 7.00004C1.75033 6.59734 1.42387 6.27087 1.02116 6.27087C0.618452 6.27087 0.291992 6.59734 0.291992 7.00004C0.291992 7.40274 0.618452 7.72921 1.02116 7.72921Z" fill="#FFAE4B"/>
-              <path d="M2.77116 3.49996C3.17386 3.49996 3.50033 3.1735 3.50033 2.77079C3.50033 2.36809 3.17386 2.04163 2.77116 2.04163C2.36845 2.04163 2.04199 2.36809 2.04199 2.77079C2.04199 3.1735 2.36845 3.49996 2.77116 3.49996Z" fill="#FFAE4B"/>
-            </svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M6.99967 10.7917C9.09375 10.7917 10.7913 9.09412 10.7913 7.00004C10.7913 4.90596 9.09375 3.20837 6.99967 3.20837C4.9056 3.20837 3.20801 4.90596 3.20801 7.00004C3.20801 9.09412 4.9056 10.7917 6.99967 10.7917Z" fill="#FFAE4B" stroke="#FFAE4B" stroke-width="1.16667" stroke-linejoin="round"/><path d="M6.99967 1.74996C7.40238 1.74996 7.72884 1.4235 7.72884 1.02079C7.72884 0.618086 7.40238 0.291626 6.99967 0.291626C6.59697 0.291626 6.27051 0.618086 6.27051 1.02079C6.27051 1.4235 6.59697 1.74996 6.99967 1.74996Z" fill="#FFAE4B"/><path d="M11.2292 3.50001C11.6319 3.50001 11.9583 3.17354 11.9583 2.77084C11.9583 2.36813 11.6319 2.04167 11.2292 2.04167C10.8265 2.04167 10.5 2.36813 10.5 2.77084C10.5 3.17354 10.8265 3.50001 11.2292 3.50001Z" fill="#FFAE4B"/><path d="M12.9792 7.72916C13.3819 7.72916 13.7083 7.4027 13.7083 6.99999C13.7083 6.59729 13.3819 6.27083 12.9792 6.27083C12.5765 6.27083 12.25 6.59729 12.25 6.99999C12.25 7.4027 12.5765 7.72916 12.9792 7.72916Z" fill="#FFAE4B"/><path d="M11.2292 11.9583C11.6319 11.9583 11.9583 11.6319 11.9583 11.2292C11.9583 10.8265 11.6319 10.5 11.2292 10.5C10.8265 10.5 10.5 10.8265 10.5 11.2292C10.5 11.6319 10.8265 11.9583 11.2292 11.9583Z" fill="#FFAE4B"/><path d="M6.99967 13.7083C7.40238 13.7083 7.72884 13.3819 7.72884 12.9792C7.72884 12.5765 7.40238 12.25 6.99967 12.25C6.59697 12.25 6.27051 12.5765 6.27051 12.9792C6.27051 13.3819 6.59697 13.7083 6.99967 13.7083Z" fill="#FFAE4B"/><path d="M2.77116 11.9583C3.17386 11.9583 3.50033 11.6319 3.50033 11.2292C3.50033 10.8265 3.17386 10.5 2.77116 10.5C2.36845 10.5 2.04199 10.8265 2.04199 11.2292C2.04199 11.6319 2.36845 11.9583 2.77116 11.9583Z" fill="#FFAE4B"/><path d="M1.02116 7.72921C1.42387 7.72921 1.75033 7.40274 1.75033 7.00004C1.75033 6.59734 1.42387 6.27087 1.02116 6.27087C0.618452 6.27087 0.291992 6.59734 0.291992 7.00004C0.291992 7.40274 0.618452 7.72921 1.02116 7.72921Z" fill="#FFAE4B"/><path d="M2.77116 3.49996C3.17386 3.49996 3.50033 3.1735 3.50033 2.77079C3.50033 2.36809 3.17386 2.04163 2.77116 2.04163C2.36845 2.04163 2.04199 2.36809 2.04199 2.77079C2.04199 3.1735 2.36845 3.49996 2.77116 3.49996Z" fill="#FFAE4B"/></svg>
           </div>
           <span class="shift-label">白班</span>
         </div>
-        <div class="shift-subtitle-row">
-          <span class="sub-line"></span>
-          <span>你工作時段的派工</span>
-          <span class="sub-line"></span>
-        </div>
+        <div class="shift-subtitle-row"><span class="sub-line"></span><span>你工作時段的派工</span><span class="sub-line"></span></div>
       </div>
 
       <div class="mission-card-list filter-all" id="missionCardList">
-
-        <!-- 1-2. Done/completed tasks FIRST (Figma order: 7:1858, 7:1859 at top) -->
-
-        <div class="task-item" data-status="done">
-          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')">
-            <span class="card-title">藥品配送</span>
-            <span class="card-sub">於 10:20 結束</span>
-          </button>
-        </div>
-
-        <div class="task-item" data-status="done">
-          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')">
-            <span class="card-title">檢體取送</span>
-            <span class="card-sub">於 10:12 結束</span>
-          </button>
-        </div>
-
-        <!-- 3-4. Active/executing cards (Figma: 7:1860, 7:1861) -->
-
+        <!-- Done cards FIRST per Figma -->
+        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')"><span class="card-title">藥品配送</span><span class="card-sub">於 10:20 結束</span></button></div>
+        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')"><span class="card-title">檢體取送</span><span class="card-sub">於 10:12 結束</span></button></div>
+        <!-- Active cards -->
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（藥品配送-執行中）')">
             <div class="active-top"><span class="active-top-title">藥品配送</span></div>
-            <div class="active-mid">
-              <div class="active-mid-title">正在領取藥品</div>
-              <div class="active-mid-sub">護理師正在領取藥品</div>
-            </div>
+            <div class="active-mid"><div class="active-mid-title">正在領取藥品</div><div class="active-mid-sub">護理師正在領取藥品</div></div>
             <div class="active-progress">
               <div class="progress-row">
-                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
-                <div class="progress-track-zone">
-                  <div class="progress-track"><div class="progress-fill p50"></div></div>
-                  <img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
-                </div>
-                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站">
+                <div class="progress-track-zone"><div class="progress-track"><div class="progress-fill p50"></div></div><img class="progress-robot p50" src="icons/icon-24px-robot.svg" alt="機器人"></div>
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站">
               </div>
               <div class="progress-labels"><span>護理站</span><span>A-2</span><span>護理站</span></div>
             </div>
           </button>
         </div>
-
         <div class="task-item" data-status="executing">
           <button class="mission-card-active" onclick="alert('任務詳情（檢體取送-執行中）')">
             <div class="active-top"><span class="active-top-title">檢體取送</span></div>
-            <div class="active-mid">
-              <div class="active-mid-title">請前往 B-1 區交付檢體</div>
-              <div class="active-mid-sub">請儘速前來，避免機器人超時離去</div>
-            </div>
+            <div class="active-mid"><div class="active-mid-title">請前往 B-1 區交付檢體</div><div class="active-mid-sub">請儘速前來，避免機器人超時離去</div></div>
             <div class="active-progress">
               <div class="progress-row">
-                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站" width="24" height="24">
-                <div class="progress-track-zone">
-                  <div class="progress-track"><div class="progress-fill p52"></div></div>
-                  <img class="progress-robot p52" src="icons/icon-24px-robot.svg" alt="機器人" width="24" height="24">
-                </div>
-                <img class="station-icon" src="icons/icon-24px-specimen-station.svg" alt="檢體站" width="24" height="24">
+                <img class="station-icon" src="icons/icon-24px-nursing-station.svg" alt="護理站">
+                <div class="progress-track-zone"><div class="progress-track"><div class="progress-fill p52"></div></div><img class="progress-robot p52" src="icons/icon-24px-robot.svg" alt="機器人"></div>
+                <img class="station-icon" src="icons/icon-24px-specimen-station.svg" alt="檢體站">
               </div>
-              <div class="progress-labels">
-                <span style="color:#4d5055">護理站</span><span>B-1</span><span>檢體站</span>
-              </div>
+              <div class="progress-labels"><span style="color:#4d5055">護理站</span><span>B-1</span><span>檢體站</span></div>
             </div>
           </button>
         </div>
-
-        <!-- 5. Pending card (no icon) -->
-        <div class="task-item" data-status="pending">
-          <button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')">
-            <span class="card-title">檢體取送</span>
-            <span class="card-sub">預約執行時間：10:20~10:25 (5min)</span>
-          </button>
-        </div>
-
-        <!-- Shift Change Divider (Figma: 7:1863) - only visible in "all" and "done" filters -->
-        <div class="task-item shift-divider" data-status="done-shift">
-          <div class="divider-row" style="padding: 8px 0;">
-            <span class="line"></span>
-            <span>因轉換班別，不執行派工記錄 (4)</span>
-            <span class="line"></span>
-          </div>
-        </div>
-
-        <!-- Post-shift cards - all grey/done but SEPARATE from above completed tasks -->
-
-        <div class="task-item" data-status="done-shift">
-          <button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')">
-            <span class="card-title">環境介紹-帶入病室</span>
-            <span class="card-sub">無法執行派工，請自行執行環境介紹</span>
-          </button>
-        </div>
-
-        <div class="task-item" data-status="done-shift">
-          <button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')">
-            <span class="card-title">檢體取送</span>
-            <span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span>
-          </button>
-        </div>
-
-        <div class="task-item" data-status="done-shift">
-          <button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')">
-            <span class="card-title">藥品配送</span>
-            <span class="card-sub">無法執行派工，請自行前往護理站領藥</span>
-          </button>
-        </div>
-
-        <div class="task-item" data-status="done-shift">
-          <button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')">
-            <span class="card-title">護理衛教</span>
-            <span class="card-sub">無法執行派工，請重新預約衛教</span>
-          </button>
-        </div>
-
-      </div><!-- /mission-card-list -->
-
-      <!-- Empty State for future dates (Figma: 124-2644) -->
-      <div id="emptyState" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding: 60px 16px; gap: 16px;">
-        <!-- Illustration from Figma node 134-2681 -->
-        <img src="icons/empty-illust.svg" alt="暫無派工" width="200" height="171" style="display:block;">
-        <!-- Text from Figma -->
-        <div style="text-align:center;">
-          <p style="font-size:16px; font-weight:400; color:#000; line-height:24px; margin:0;">暫無待執行派工</p>
-          <p style="font-size:16px; font-weight:400; color:#747980; line-height:24px; margin:8px 0 0;">都不給我事情做，是要我怎麼跟老闆交代...</p>
-        </div>
+        <!-- Pending card -->
+        <div class="task-item" data-status="pending"><button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')"><span class="card-title">檢體取送</span><span class="card-sub">預約執行時間：10:20~10:25 (5min)</span></button></div>
+        <!-- Shift Change Divider -->
+        <div class="task-item shift-divider" data-status="done-shift"><div class="divider-row" style="padding:0.5em 0;"><span class="line"></span><span>因轉換班別，不執行派工記錄 (4)</span><span class="line"></span></div></div>
+        <!-- Post-shift cards -->
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')"><span class="card-title">環境介紹-帶入病室</span><span class="card-sub">無法執行派工，請自行執行環境介紹</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')"><span class="card-title">檢體取送</span><span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')"><span class="card-title">藥品配送</span><span class="card-sub">無法執行派工，請自行前往護理站領藥</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')"><span class="card-title">護理衛教</span><span class="card-sub">無法執行派工，請重新預約衛教</span></button></div>
       </div>
 
-    </div><!-- /mission-scroll-area -->
-
-  </section><!-- /page-mission -->
-
-
-  <!-- ============================================
-       PAGE 3: MINE (我的) - Placeholder
-       ============================================ -->
-  <section class="page page-mine" id="pageMine">
-    <div class="mine-top-area">
-      <div class="mission-header">
-        <span class="header-title">我的</span>
+      <!-- Empty State -->
+      <div id="emptyState" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding:3.75em 1em; gap:1em;">
+        <img src="icons/empty-illust.svg" alt="暫無派工" style="width:12.5em; max-width:200px; display:block;">
+        <div style="text-align:center;"><p style="font-size:1em; font-weight:400; color:#000; line-height:1.5; margin:0;">暫無待執行派工</p><p style="font-size:1em; font-weight:400; color:#747980; line-height:1.5; margin:0.5em 0 0;">都不給我事情做，是要我怎麼跟老闆交代...</p></div>
       </div>
     </div>
+  </section><!-- /page-mission -->
+
+  <!-- ============================================
+       PAGE 3: MINE (我的)
+       ============================================ -->
+  <section class="page page-mine" id="pageMine">
+    <div class="mine-top-area"><div class="mission-header"><span class="header-title">我的</span></div></div>
     <div class="mine-content">
       <div class="mine-placeholder">
-        <svg class="icon-large" viewBox="0 0 64 64" fill="none">
-          <circle cx="32" cy="24" r="12" stroke="#9aa0a9" stroke-width="3"/>
-          <path d="M12 56c0-11 9-20 20-20s20 9 20 20" stroke="#9aa0a9" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+        <svg class="icon-large" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" stroke="#9aa0a9" stroke-width="3"/><path d="M12 56c0-11 9-20 20-20s20 9 20 20" stroke="#9aa0a9" stroke-width="3" stroke-linecap="round"/></svg>
         <p>個人中心敬請期待</p>
       </div>
     </div>
   </section>
-
 
   <!-- ============================================
        SHARED BOTTOM AREA
        ============================================ -->
   <div class="bottom-area">
     <div class="bottom-nav" id="bottomNav">
-      <button class="nav-tab active" data-page="home" onclick="switchPage('home')">
-        <img src="icons/icon-32px-home-selected.svg" alt="首頁" width="32" height="32" class="tab-icon"
-             data-icon-home-default="icons/icon-32px-home-default.svg"
-             data-icon-home-selected="icons/icon-32px-home-selected.svg">
-        <span>首頁</span>
-      </button>
-      <button class="nav-tab" data-page="mission" onclick="switchPage('mission')">
-        <img src="icons/icon-32px-mission-default.svg" alt="派工列表" width="32" height="32" class="tab-icon"
-             data-icon-mission-default="icons/icon-32px-mission-default.svg"
-             data-icon-mission-selected="icons/icon-32px-mission-selected.svg">
-        <span>派工列表</span>
-      </button>
-      <button class="nav-tab" data-page="mine" onclick="switchPage('mine')">
-        <img src="icons/icon-32px-mine-default.svg" alt="我的" width="32" height="32" class="tab-icon"
-             data-icon-mine-default="icons/icon-32px-mine-default.svg"
-             data-icon-mine-selected="icons/icon-32px-mine-default.svg">
-        <span>我的</span>
-      </button>
+      <button class="nav-tab active" data-page="home" onclick="switchPage('home')"><img src="icons/icon-32px-home-selected.svg" alt="首頁" class="tab-icon" data-icon-home-default="icons/icon-32px-home-default.svg" data-icon-home-selected="icons/icon-32px-home-selected.svg"><span>首頁</span></button>
+      <button class="nav-tab" data-page="mission" onclick="switchPage('mission')"><img src="icons/icon-32px-mission-default.svg" alt="派工列表" class="tab-icon" data-icon-mission-default="icons/icon-32px-mission-default.svg" data-icon-mission-selected="icons/icon-32px-mission-selected.svg"><span>派工列表</span></button>
+      <button class="nav-tab" data-page="mine" onclick="switchPage('mine')"><img src="icons/icon-32px-mine-default.svg" alt="我的" class="tab-icon" data-icon-mine-default="icons/icon-32px-mine-default.svg" data-icon-mine-selected="icons/icon-32px-mine-default.svg"><span>我的</span></button>
     </div>
   </div>
 
 </div><!-- /phone-frame -->
 
-
-<!-- =============================================
-     JAVASCRIPT: SPA State Management
-     ============================================= -->
 <script>
-  // ── State ──
   const TODAY = new Date();
-  const MAX_PAST_DAYS = 7;  // ±7 days limit per requirement
-  const state = {
-    currentPage: 'home',
-    missionDate: new Date(),
-    missionFilter: 'all',
-    defaultFilter: 'all'
-  };
-
-  // ── Weekday helper ──
+  const MAX_PAST_DAYS = 7;
+  const state = { currentPage: 'home', missionDate: new Date(), missionFilter: 'all', defaultFilter: 'all' };
   const WEEKDAYS = ['日','一','二','三','四','五','六'];
 
   function formatDate(d) {
-    const isToday = d.toDateString() === TODAY.toDateString();
-    const m = d.getMonth() + 1;
-    const day = d.getDate();
-    const wd = WEEKDAYS[d.getDay()];
-    return {
-      label: isToday ? '今日' : `${m}/${day}`,
-      detail: `${m}/${day}（${wd}）`,
-      isToday
-    };
+    var isToday = d.toDateString() === TODAY.toDateString();
+    var m = d.getMonth() + 1, day = d.getDate(), wd = WEEKDAYS[d.getDay()];
+    return { label: isToday ? '今日' : m + '/' + day, detail: m + '/' + day + '（' + wd + '）', isToday: isToday };
   }
+  function getDaysDiff(d1, d2) { return Math.floor((d1.getTime() - d2.getTime()) / 86400000); }
 
-  function getDaysDiff(d1, d2) {
-    const ms = d1.getTime() - d2.getTime();
-    return Math.floor(ms / (1000 * 60 * 60 * 24));
-  }
-
-  // ── Page Switching ──
   function switchPage(pageName, defaultFilter) {
     state.currentPage = pageName;
-    if (defaultFilter) {
-      state.missionFilter = defaultFilter;
-      state.defaultFilter = defaultFilter;
-    }
-
-    // Toggle page visibility
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    var pageId = 'page' + pageName.charAt(0).toUpperCase() + pageName.slice(1);
-    var targetPage = document.getElementById(pageId);
+    if (defaultFilter) { state.missionFilter = defaultFilter; state.defaultFilter = defaultFilter; }
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    var targetPage = document.getElementById('page' + pageName.charAt(0).toUpperCase() + pageName.slice(1));
     if (targetPage) targetPage.classList.add('active');
-
-    // Update bottom nav tabs
-    var tabs = document.querySelectorAll('#bottomNav .nav-tab');
-    tabs.forEach(function(tab) {
+    document.querySelectorAll('#bottomNav .nav-tab').forEach(function(tab) {
       var isActive = tab.dataset.page === pageName;
       tab.classList.toggle('active', isActive);
       var icon = tab.querySelector('.tab-icon');
       if (icon) {
-        var iconKey = tab.dataset.page;
-        var capKey = iconKey.charAt(0).toUpperCase() + iconKey.slice(1);
-        var defaultSrc = icon.dataset['icon' + capKey + 'Default'];
-        var selectedSrc = icon.dataset['icon' + capKey + 'Selected'];
-        icon.src = isActive ? selectedSrc : defaultSrc;
+        var capKey = tab.dataset.page.charAt(0).toUpperCase() + tab.dataset.page.slice(1);
+        icon.src = isActive ? icon.dataset['icon' + capKey + 'Selected'] : icon.dataset['icon' + capKey + 'Default'];
       }
     });
-
-    // Sync mission filter state when switching to mission
-    if (pageName === 'mission') {
-      syncMissionFilter();
-      updateDateDisplay();
-      updateDateArrowState();
-      updateEmptyState();
-    }
+    if (pageName === 'mission') { syncMissionFilter(); updateDateDisplay(); updateDateArrowState(); updateEmptyState(); }
   }
 
-  // ── Mission: Date Navigation (±7 days) ──
   function changeDate(delta) {
-    var newDate = new Date(state.missionDate);
-    newDate.setDate(newDate.getDate() + delta);
-
-    // Limit to ±7 days from today
-    var diffDays = getDaysDiff(newDate, TODAY);
-    if (Math.abs(diffDays) > MAX_PAST_DAYS) return;
-
-    state.missionDate = newDate;
-    updateDateDisplay();
-    updateDateArrowState();
-    updateEmptyState();
+    var newDate = new Date(state.missionDate); newDate.setDate(newDate.getDate() + delta);
+    if (Math.abs(getDaysDiff(newDate, TODAY)) > MAX_PAST_DAYS) return;
+    state.missionDate = newDate; updateDateDisplay(); updateDateArrowState(); updateEmptyState();
   }
-
-  function updateEmptyState() {
-    var emptyEl = document.getElementById('emptyState');
-    var cardList = document.getElementById('missionCardList');
-    if (!emptyEl || !cardList) return;
-    var diffDays = getDaysDiff(state.missionDate, TODAY);
-    // Show empty state for future dates (diffDays > 0 means future)
-    if (diffDays > 0) {
-      emptyEl.style.display = 'flex';
-      cardList.style.display = 'none';
-    } else {
-      emptyEl.style.display = 'none';
-      cardList.style.display = '';
-    }
-  }
-
   function updateDateDisplay() {
-    var display = document.getElementById('dateDisplay');
-    if (!display) return;
+    var display = document.getElementById('dateDisplay'); if (!display) return;
     var fmt = formatDate(state.missionDate);
     display.querySelector('.date-label').textContent = fmt.label;
     display.querySelector('.date-detail').textContent = fmt.detail;
   }
-
   function updateDateArrowState() {
-    var btnNext = document.getElementById('btnDateNext');
-    var btnPrev = document.getElementById('btnDatePrev');
+    var btnNext = document.getElementById('btnDateNext'), btnPrev = document.getElementById('btnDatePrev');
     if (!btnNext || !btnPrev) return;
-
     var diffDays = getDaysDiff(state.missionDate, TODAY);
-    // Future limit: can't go more than 7 days ahead
     btnNext.disabled = diffDays >= MAX_PAST_DAYS;
-    // Past limit: can't go more than 7 days back
     btnPrev.disabled = diffDays <= -MAX_PAST_DAYS;
   }
-
-  // ── Mission: Filter Tabs ──
+  function updateEmptyState() {
+    var emptyEl = document.getElementById('emptyState'), cardList = document.getElementById('missionCardList');
+    if (!emptyEl || !cardList) return;
+    if (getDaysDiff(state.missionDate, TODAY) > 0) { emptyEl.style.display = 'flex'; cardList.style.display = 'none'; }
+    else { emptyEl.style.display = 'none'; cardList.style.display = ''; }
+  }
   function setFilter(filterName) {
     state.missionFilter = filterName;
-
-    document.querySelectorAll('#filterTabs .filter-tab').forEach(function(tab) {
-      tab.classList.toggle('active', tab.dataset.filter === filterName);
-    });
-
+    document.querySelectorAll('#filterTabs .filter-tab').forEach(function(tab) { tab.classList.toggle('active', tab.dataset.filter === filterName); });
     var cardList = document.getElementById('missionCardList');
-    if (cardList) {
-      cardList.className = 'mission-card-list filter-' + filterName;
-    }
+    if (cardList) cardList.className = 'mission-card-list filter-' + filterName;
   }
-
-  function syncMissionFilter() {
-    setFilter(state.missionFilter);
-  }
-
-  // ── Init ──
-  document.addEventListener('DOMContentLoaded', function() {
-    updateDateDisplay();
-    updateDateArrowState();
-  });
+  function syncMissionFilter() { setFilter(state.missionFilter); }
+  document.addEventListener('DOMContentLoaded', function() { updateDateDisplay(); updateDateArrowState(); });
 </script>
-
 </body>
 </html>

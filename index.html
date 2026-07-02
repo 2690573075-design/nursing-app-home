@@ -219,7 +219,8 @@
      PAGE 2: MISSION LIST (派工列表)
      ============================================= */
   .page-mission { background: var(--bg); }
-  .mission-top-area { flex-shrink: 0; background: var(--header-bg); z-index: 2; }
+  .mission-top-area { flex-shrink: 0; background: var(--header-bg); position: relative; z-index: 2; transition: box-shadow 0.2s; }
+  .mission-top-area.scrolled { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
   .mission-header {
     padding: 12px 16px;
     display: flex;
@@ -614,6 +615,14 @@
     if (homeScroll && homeTop) {
       homeScroll.addEventListener('scroll', function() {
         homeTop.classList.toggle('scrolled', homeScroll.scrollTop > 0);
+      }, {passive: true});
+    }
+    // Scroll shadow for mission page top-area
+    var missionScroll = document.querySelector('#pageMission .mission-scroll-area');
+    var missionTop = document.querySelector('#pageMission .mission-top-area');
+    if (missionScroll && missionTop) {
+      missionScroll.addEventListener('scroll', function() {
+        missionTop.classList.toggle('scrolled', missionScroll.scrollTop > 0);
       }, {passive: true});
     }
   });

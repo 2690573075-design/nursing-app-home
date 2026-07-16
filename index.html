@@ -326,14 +326,38 @@
   .ended-header span { font-size: 16px; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
 
   /* =============================================
-     PAGE 3: MINE (我的)
+     PAGE 3: MINE (我的) - Figma: 97:3948
      ============================================= */
-  .page-mine { background: var(--bg); }
-  .mine-top-area { flex-shrink: 0; background: var(--header-bg); z-index: 2; }
-  .mine-content { flex: 1; display: flex; align-items: center; justify-content: center; background: var(--bg); }
-  .mine-placeholder { text-align: center; color: var(--gray-done); }
-  .mine-placeholder .icon-large { width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.4; }
-  .mine-placeholder p { font-size: 16px; font-weight: 500; line-height: 1.5; }
+  .page-mine { background: #fff; }
+  .mine-top-area {
+    flex-shrink: 0; background: #D2EFFF; z-index: 2;
+    position: relative; overflow: hidden;
+  }
+  .mine-top-decor {
+    position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+    width: 138px; height: 138px; background: #D4F1FF; border-radius: 50%;
+    pointer-events: none;
+  }
+  .mine-scroll-area {
+    flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    background: #fff; padding: 0 16px 16px;
+  }
+  .mine-section { margin-top: 24px; }
+  .mine-section-title {
+    font-size: 16px; font-weight: 700; color: var(--text-primary);
+    line-height: 24px; margin-bottom: 10px;
+  }
+  .mine-card {
+    background: #F6F8FA; border-radius: 12px; padding: 0 16px;
+  }
+  .mine-row {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 48px; padding: 12px 0;
+  }
+  .mine-row-label { font-size: 16px; font-weight: 500; color: var(--text-primary); }
+  .mine-row-value { font-size: 16px; font-weight: 400; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+  .mine-row-link { font-size: 16px; font-weight: 500; color: var(--blue); cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .mine-divider { height: 1px; background: #E2EAEE; }
 
   /* =============================================
      SHARED BOTTOM AREA
@@ -519,14 +543,70 @@
   </section><!-- /page-mission -->
 
   <!-- ============================================
-       PAGE 3: MINE (我的)
+       PAGE 3: MINE (我的) - Figma: 97:3948
        ============================================ -->
   <section class="page page-mine" id="pageMine">
-    <div class="mine-top-area"><div class="mission-header"><span class="header-title">我的</span></div></div>
-    <div class="mine-content">
-      <div class="mine-placeholder">
-        <svg class="icon-large" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" stroke="#9aa0a9" stroke-width="3"/><path d="M12 56c0-11 9-20 20-20s20 9 20 20" stroke="#9aa0a9" stroke-width="3" stroke-linecap="round"/></svg>
-        <p>個人中心敬請期待</p>
+    <div class="mine-top-area">
+      <div class="mine-top-decor"></div>
+      <div class="mission-header" style="background:transparent;">
+        <span class="header-title">我的</span>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="toggleRedDot()">
+            <img src="icons/icon-24px-logout.svg" alt="通知" width="24" height="24" style="width:24px;height:24px;">
+            <span class="red-dot" style="top:2px;right:2px;"></span>
+            <span class="red-dot" style="top:-3px;right:2px;"></span>
+          </button>
+          <button class="icon-btn">
+            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
+          </button>
+          <button class="icon-btn">
+            <img src="icons/icon-24px-logout.svg" alt="登出" width="24" height="24">
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mine-scroll-area">
+      <!-- 個人資訊 -->
+      <div class="mine-section">
+        <div class="mine-section-title">個人資訊</div>
+        <div class="mine-card">
+          <div class="mine-row">
+            <span class="mine-row-label">使用權限：</span>
+            <span class="mine-row-value">一般人員</span>
+          </div>
+          <div class="mine-divider"></div>
+          <div class="mine-row">
+            <span class="mine-row-label">人員卡號：</span>
+            <span class="mine-row-value">C123</span>
+          </div>
+          <div class="mine-divider"></div>
+          <div class="mine-row">
+            <span class="mine-row-label">人員身份：</span>
+            <span class="mine-row-value">護理人員</span>
+          </div>
+          <div class="mine-divider"></div>
+          <div class="mine-row">
+            <span class="mine-row-label">護理單位：</span>
+            <span class="mine-row-value">W109</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 設定 -->
+      <div class="mine-section">
+        <div class="mine-section-title">設定</div>
+        <div class="mine-card">
+          <div class="mine-row">
+            <span class="mine-row-label">軟體版本：</span>
+            <span class="mine-row-link" onclick="alert('已是最新版本')">v1.2.0 前往更新</span>
+          </div>
+          <div class="mine-divider"></div>
+          <div class="mine-row">
+            <span class="mine-row-label">語言偏好：</span>
+            <span class="mine-row-value">繁體中文 <img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24"></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -538,7 +618,7 @@
     <div class="bottom-nav" id="bottomNav">
       <button class="nav-tab active" data-page="home" onclick="switchPage('home')"><img src="icons/icon-32px-home-selected.svg" alt="首頁" class="tab-icon" data-icon-home-default="icons/icon-32px-home-default.svg" data-icon-home-selected="icons/icon-32px-home-selected.svg"><span>首頁</span></button>
       <button class="nav-tab" data-page="mission" onclick="switchPage('mission')"><img src="icons/icon-32px-mission-default.svg" alt="派工列表" class="tab-icon" data-icon-mission-default="icons/icon-32px-mission-default.svg" data-icon-mission-selected="icons/icon-32px-mission-selected.svg"><span>派工列表</span></button>
-      <button class="nav-tab" data-page="mine" onclick="switchPage('mine')"><img src="icons/icon-32px-mine-default.svg" alt="我的" class="tab-icon" data-icon-mine-default="icons/icon-32px-mine-default.svg" data-icon-mine-selected="icons/icon-32px-mine-default.svg"><span>我的</span></button>
+      <button class="nav-tab" data-page="mine" onclick="switchPage('mine')"><img src="icons/icon-32px-mine-default.svg" alt="我的" class="tab-icon" data-icon-mine-default="icons/icon-32px-mine-default.svg" data-icon-mine-selected="icons/icon-32px-mine-selected.svg"><span>我的</span></button>
     </div>
   </div>
 

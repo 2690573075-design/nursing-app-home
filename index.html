@@ -367,14 +367,15 @@
   .mine-section:first-child { margin-top: 0; }
   .mine-section-title {
     font-size: 16px; font-weight: 700; color: var(--text-primary);
-    line-height: 24px; margin-bottom: 8px;
+    line-height: 24px; margin-bottom: 6px;
   }
   .mine-card {
     background: #F6F8FA; border-radius: 12px; padding: 20px 16px;
   }
+  .mine-card + .mine-card { margin-top: 6px; }
   .mine-row {
     display: flex; align-items: center; justify-content: flex-start;
-    padding: 12px 0; gap: 0;
+    padding: 20px 0; gap: 0;
   }
   .mine-row-label { font-size: 16px; font-weight: 500; color: var(--text-primary); white-space: nowrap; }
   .mine-row-value { font-size: 16px; font-weight: 400; color: var(--text-primary); white-space: nowrap; }
@@ -617,7 +618,8 @@
         <div class="mine-section-title">設定</div>
         <div class="mine-card">
           <div class="mine-row"><span class="mine-row-label">軟體版本：</span><span class="mine-row-value">v1.2.0</span><span class="mine-row-link" onclick="alert('已是最新版本')">前往更新</span></div>
-          <div class="mine-divider"></div>
+        </div>
+        <div class="mine-card">
           <div class="mine-row"><span class="mine-row-label">語言偏好：</span><span class="mine-row-value">繁體中文</span><img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24" style="margin-left:auto;"></div>
         </div>
       </div>

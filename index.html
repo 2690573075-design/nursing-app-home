@@ -330,18 +330,10 @@
      ============================================= */
   .page-mine { background: #fff; }
   .mine-top-area {
-    flex-shrink: 0; background: #D2EFFF; z-index: 2;
+    flex-shrink: 0; background: #D2EFFF url(icons/mine-bg.png) center/100% 100% no-repeat; z-index: 2;
     position: relative; overflow: hidden;
+    min-height: 248px;
   }
-  .mine-top-decor {
-    position: absolute; top: 64px; left: 50%; transform: translateX(-50%);
-    width: 138px; height: 138px; background: #D4F1FF; border-radius: 50%;
-    pointer-events: none;
-  }
-  .mine-top-ellipse { position: absolute; border-radius: 50%; pointer-events: none; }
-  .mine-top-ellipse.e2 { top: 67px; right: -30px; width: 97px; height: 97px; background: #D4F1FF; opacity: 0.5; }
-  .mine-top-ellipse.e3 { top: 137px; left: 18px; width: 75px; height: 75px; background: #D4F1FF; opacity: 0.4; }
-  .mine-top-ellipse.e4 { top: 64px; left: 52px; width: 34px; height: 34px; background: #D4F1FF; opacity: 0.6; }
   .mine-avatar-area {
     display: flex; flex-direction: column; align-items: center;
     padding: 8px 0 24px; position: relative; z-index: 1;
@@ -575,10 +567,6 @@
        ============================================ -->
   <section class="page page-mine" id="pageMine">
     <div class="mine-top-area">
-      <div class="mine-top-decor"></div>
-      <div class="mine-top-ellipse e2"></div>
-      <div class="mine-top-ellipse e3"></div>
-      <div class="mine-top-ellipse e4"></div>
       <div class="mission-header" style="background:transparent;">
         <span class="header-title">我的</span>
         <div class="header-actions">

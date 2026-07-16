@@ -370,17 +370,18 @@
     line-height: 24px; margin-bottom: 6px;
   }
   .mine-card {
-    background: #F6F8FA; border-radius: 12px; padding: 20px 16px;
+    background: #F6F8FA; border-radius: 12px;
+    display: flex; flex-direction: column; gap: 20px;
+    padding: 20px 20px;
   }
   .mine-card + .mine-card { margin-top: 6px; }
   .mine-row {
-    display: flex; align-items: center; justify-content: flex-start;
-    padding: 20px 0; gap: 0;
+    display: flex; align-items: center; padding: 0;
   }
   .mine-row-label { font-size: 16px; font-weight: 500; color: var(--text-primary); white-space: nowrap; }
   .mine-row-value { font-size: 16px; font-weight: 400; color: var(--text-primary); white-space: nowrap; }
   .mine-row-link { font-size: 16px; font-weight: 500; color: var(--blue); cursor: pointer; margin-left: auto; }
-  .mine-divider { height: 1px; background: #E2EAEE; }
+  .mine-divider { height: 1px; background: #E2EAEE; margin: 0; }
 
   /* =============================================
      SHARED BOTTOM AREA

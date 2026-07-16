@@ -378,7 +378,7 @@
         <span class="header-title">👋 Hi 護理師名稱</span>
         <div class="header-actions">
           <button class="icon-btn"><img src="icons/icon-24px-scan.svg" alt="掃碼"></button>
-          <button class="icon-btn"><img src="icons/icon-24px-message.svg" alt="消息"><span class="red-dot"></span></button>
+          <button class="icon-btn" onclick="toggleRedDot()"><img src="icons/icon-24px-message.svg" alt="消息"><span class="red-dot" id="msgRedDot" style="display:none"></span></button>
         </div>
       </div>
 
@@ -610,6 +610,16 @@
     if (cardList) cardList.className = 'mission-card-list filter-' + filterName;
   }
   function syncMissionFilter() { setFilter(state.missionFilter); }
+  // Red dot toggle (demo: click message icon to toggle)
+  function toggleRedDot() {
+    var dot = document.getElementById('msgRedDot');
+    if (dot) dot.style.display = dot.style.display === 'none' ? '' : 'none';
+  }
+  // Auto-set red dot visibility based on message state
+  function setRedDot(hasMsg) {
+    var dot = document.getElementById('msgRedDot');
+    if (dot) dot.style.display = hasMsg ? '' : 'none';
+  }
   document.addEventListener('DOMContentLoaded', function() {
     updateDateDisplay();
     updateDateArrowState();

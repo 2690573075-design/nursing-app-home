@@ -427,10 +427,10 @@
       </div>
 
       <div class="quick-grid">
-        <div class="grid-item"><img src="icons/icon-grid-medicine.png" alt="藥品配送"><span>藥品配送</span></div>
-        <div class="grid-item"><img src="icons/icon-grid-specimen.png" alt="檢體取送"><span>檢體取送</span></div>
-        <div class="grid-item"><img src="icons/icon-grid-health-edu.png" alt="護理衛教"><span>護理衛教</span></div>
-        <div class="grid-item"><img src="icons/icon-grid-environment.png" alt="環境介紹"><span>環境介紹</span></div>
+        <div class="grid-item" onclick="showToast()"><img src="icons/icon-grid-medicine.png" alt="藥品配送"><span>藥品配送</span></div>
+        <div class="grid-item" onclick="showToast()"><img src="icons/icon-grid-specimen.png" alt="檢體取送"><span>檢體取送</span></div>
+        <div class="grid-item" onclick="showToast()"><img src="icons/icon-grid-health-edu.png" alt="護理衛教"><span>護理衛教</span></div>
+        <div class="grid-item" onclick="showToast()"><img src="icons/icon-grid-environment.png" alt="環境介紹"><span>環境介紹</span></div>
       </div>
 
       <div class="section-title">
@@ -441,9 +441,9 @@
 
     <div class="scroll-area">
       <div class="task-list">
-        <div class="card card-completed"><span class="title">藥品配送</span><span class="subtitle">於 <b>10:20</b> 結束</span></div>
+        <div class="card card-completed" onclick="showToast()"><span class="title">藥品配送</span><span class="subtitle">於 <b>10:20</b> 結束</span></div>
         <div class="divider-row"><span class="line"></span><span>以上是最近10分鐘內結束的派工</span><span class="line"></span></div>
-        <div class="card card-active">
+        <div class="card card-active" onclick="showToast()">
           <div class="active-header"><span class="title">藥品配送</span></div>
           <div class="active-info"><div class="info-title">正在領取藥品</div><div class="info-sub">護理師正在領取藥品</div></div>
           <div class="progress-section">
@@ -458,15 +458,15 @@
             <div class="progress-labels"><span></span><span>A-2</span><span></span></div>
           </div>
         </div>
-        <div class="card card-warning">
+        <div class="card card-warning" onclick="showToast()">
           <div class="title">檢體取送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div>
           <div class="warning-banner">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#ee913e" stroke-width="1.5"/><path d="M10 6v5M10 13.5v.5" stroke="#ee913e" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="warn-text">派工異動，延後執行時間</span>
           </div>
         </div>
-        <div class="card card-pending"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
-        <div class="card card-pending"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
+        <div class="card card-pending" onclick="showToast()"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
+        <div class="card card-pending" onclick="showToast()"><div class="title">藥品配送</div><div class="subtitle">預約執行時間：10:20~10:25 (5min)</div></div>
       </div>
     </div>
   </section><!-- /page-home -->
@@ -510,11 +510,11 @@
 
       <div class="mission-card-list filter-all" id="missionCardList">
         <!-- Done cards FIRST per Figma -->
-        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="alert('任務詳情（藥品配送-已結束）')"><span class="card-title">藥品配送</span><span class="card-sub">於 10:20 結束</span></button></div>
-        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="alert('任務詳情（檢體取送-已結束）')"><span class="card-title">檢體取送</span><span class="card-sub">於 10:12 結束</span></button></div>
+        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="showToast('任務詳情功能暂未开发')"><span class="card-title">藥品配送</span><span class="card-sub">於 10:20 結束</span></button></div>
+        <div class="task-item" data-status="done"><button class="mission-card-done" onclick="showToast('任務詳情功能暂未开发')"><span class="card-title">檢體取送</span><span class="card-sub">於 10:12 結束</span></button></div>
         <!-- Active cards -->
         <div class="task-item" data-status="executing">
-          <button class="mission-card-active" onclick="alert('任務詳情（藥品配送-執行中）')">
+          <button class="mission-card-active" onclick="showToast()">
             <div class="active-top"><span class="active-top-title">藥品配送</span></div>
             <div class="active-mid"><div class="active-mid-title">正在領取藥品</div><div class="active-mid-sub">護理師正在領取藥品</div></div>
             <div class="active-progress">
@@ -528,7 +528,7 @@
           </button>
         </div>
         <div class="task-item" data-status="executing">
-          <button class="mission-card-active" onclick="alert('任務詳情（檢體取送-執行中）')">
+          <button class="mission-card-active" onclick="showToast()">
             <div class="active-top"><span class="active-top-title">檢體取送</span></div>
             <div class="active-mid"><div class="active-mid-title">請前往 B-1 區交付檢體</div><div class="active-mid-sub">請儘速前來，避免機器人超時離去</div></div>
             <div class="active-progress">
@@ -544,14 +544,14 @@
           </button>
         </div>
         <!-- Pending card -->
-        <div class="task-item" data-status="pending"><button class="mission-card-pending" onclick="alert('任務詳情（檢體取送-待執行）')"><span class="card-title">檢體取送</span><span class="card-sub">預約執行時間：10:20~10:25 (5min)</span></button></div>
+        <div class="task-item" data-status="pending"><button class="mission-card-pending" onclick="showToast()"><span class="card-title">檢體取送</span><span class="card-sub">預約執行時間：10:20~10:25 (5min)</span></button></div>
         <!-- Shift Change Divider -->
         <div class="task-item shift-divider" data-status="done-shift"><div class="divider-row" style="padding:8px 0;"><span class="line"></span><span>因轉換班別，不執行派工記錄 (4)</span><span class="line"></span></div></div>
         <!-- Post-shift cards -->
-        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（環境介紹-無法執行）')"><span class="card-title">環境介紹-帶入病室</span><span class="card-sub">無法執行派工，請自行執行環境介紹</span></button></div>
-        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（檢體取送-無法執行）')"><span class="card-title">檢體取送</span><span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span></button></div>
-        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（藥品配送-無法執行）')"><span class="card-title">藥品配送</span><span class="card-sub">無法執行派工，請自行前往護理站領藥</span></button></div>
-        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="alert('任務詳情（護理衛教-無法執行）')"><span class="card-title">護理衛教</span><span class="card-sub">無法執行派工，請重新預約衛教</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="showToast()"><span class="card-title">環境介紹-帶入病室</span><span class="card-sub">無法執行派工，請自行執行環境介紹</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="showToast()"><span class="card-title">檢體取送</span><span class="card-sub">無法執行派工，請自行將檢體送往檢體站</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="showToast()"><span class="card-title">藥品配送</span><span class="card-sub">無法執行派工，請自行前往護理站領藥</span></button></div>
+        <div class="task-item" data-status="done-shift"><button class="mission-card-done" onclick="showToast()"><span class="card-title">護理衛教</span><span class="card-sub">無法執行派工，請重新預約衛教</span></button></div>
       </div>
 
       <!-- Empty State -->
@@ -571,7 +571,7 @@
         <span class="header-title">我的</span>
         <div class="header-actions">
           <button class="icon-btn">
-            <img src="icons/icon-24px-logout.svg" alt="登出" width="24" height="24">
+            <img src="icons/icon-24px-logout.svg" alt="登出" width="24" height="24" onclick="showToast('登出功能暂未开发')">
           </button>
         </div>
       </div>
@@ -613,10 +613,10 @@
       <div class="mine-section">
         <div class="mine-section-title">設定</div>
         <div class="mine-card">
-          <div class="mine-row"><span class="mine-row-label">軟體版本：</span><span class="mine-row-value">v1.2.0</span><span class="mine-row-link" onclick="alert('已是最新版本')">前往更新</span></div>
+          <div class="mine-row"><span class="mine-row-label">軟體版本：</span><span class="mine-row-value">v1.2.0</span><span class="mine-row-link" onclick="showToast()">前往更新</span></div>
         </div>
         <div class="mine-card">
-          <div class="mine-row"><span class="mine-row-label">語言偏好：</span><span class="mine-row-value">繁體中文</span><img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24" style="margin-left:auto;"></div>
+          <div class="mine-row" onclick="showToast('語言偏好功能暂未开发')"><span class="mine-row-label">語言偏好：</span><span class="mine-row-value">繁體中文</span><img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24" style="margin-left:auto;"></div>
         </div>
       </div>
     </div>
@@ -635,7 +635,16 @@
 
 </div><!-- /phone-frame -->
 
+<div id="toast" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.75); color:#fff; padding:12px 24px; border-radius:8px; font-size:14px; z-index:9999; pointer-events:none; opacity:0; transition:opacity 0.3s; white-space:nowrap;">此功能暂未开发</div>
+
 <script>
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg || '此功能暂未开发';
+  t.style.opacity = '1';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(function(){ t.style.opacity = '0'; }, 1500);
+}
   const TODAY = new Date();
   const MAX_PAST_DAYS = 7;
   const state = { currentPage: 'home', missionDate: new Date(), missionFilter: 'all', defaultFilter: 'all' };

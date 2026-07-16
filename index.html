@@ -364,20 +364,21 @@
     background: #fff; padding: 0 16px 16px;
   }
   .mine-section { margin-top: 24px; }
+  .mine-section:first-child { margin-top: 0; }
   .mine-section-title {
     font-size: 16px; font-weight: 700; color: var(--text-primary);
-    line-height: 24px; margin-bottom: 10px;
+    line-height: 24px; margin-bottom: 8px;
   }
   .mine-card {
-    background: #F6F8FA; border-radius: 12px; padding: 0 16px;
+    background: #F6F8FA; border-radius: 12px; padding: 20px 16px;
   }
   .mine-row {
-    display: flex; align-items: center; justify-content: space-between;
-    min-height: 48px; padding: 12px 0;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding: 12px 0; gap: 0;
   }
-  .mine-row-label { font-size: 16px; font-weight: 500; color: var(--text-primary); }
-  .mine-row-value { font-size: 16px; font-weight: 400; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-  .mine-row-link { font-size: 16px; font-weight: 500; color: var(--blue); cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .mine-row-label { font-size: 16px; font-weight: 500; color: var(--text-primary); white-space: nowrap; }
+  .mine-row-value { font-size: 16px; font-weight: 400; color: var(--text-primary); white-space: nowrap; }
+  .mine-row-link { font-size: 16px; font-weight: 500; color: var(--blue); cursor: pointer; margin-left: auto; }
   .mine-divider { height: 1px; background: #E2EAEE; }
 
   /* =============================================
@@ -573,12 +574,6 @@
         <span class="header-title">我的</span>
         <div class="header-actions">
           <button class="icon-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 1 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" fill="#333"/></svg>
-          </button>
-          <button class="icon-btn">
-            <img src="icons/icon-24px-scan.svg" alt="掃碼" width="24" height="24">
-          </button>
-          <button class="icon-btn">
             <img src="icons/icon-24px-logout.svg" alt="登出" width="24" height="24">
           </button>
         </div>
@@ -607,25 +602,13 @@
       <div class="mine-section">
         <div class="mine-section-title">個人資訊</div>
         <div class="mine-card">
-          <div class="mine-row">
-            <span class="mine-row-label">使用權限：</span>
-            <span class="mine-row-value">一般人員</span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">使用權限：</span><span class="mine-row-value">一般人員</span></div>
           <div class="mine-divider"></div>
-          <div class="mine-row">
-            <span class="mine-row-label">人員卡號：</span>
-            <span class="mine-row-value">C123</span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">人員卡號：</span><span class="mine-row-value">C123</span></div>
           <div class="mine-divider"></div>
-          <div class="mine-row">
-            <span class="mine-row-label">人員身份：</span>
-            <span class="mine-row-value">護理人員</span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">人員身份：</span><span class="mine-row-value">護理人員</span></div>
           <div class="mine-divider"></div>
-          <div class="mine-row">
-            <span class="mine-row-label">護理單位：</span>
-            <span class="mine-row-value">W109</span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">護理單位：</span><span class="mine-row-value">W109</span></div>
         </div>
       </div>
 
@@ -633,15 +616,9 @@
       <div class="mine-section">
         <div class="mine-section-title">設定</div>
         <div class="mine-card">
-          <div class="mine-row">
-            <span class="mine-row-label">軟體版本：</span>
-            <span class="mine-row-link" onclick="alert('已是最新版本')">v1.2.0 前往更新</span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">軟體版本：</span><span class="mine-row-value">v1.2.0</span><span class="mine-row-link" onclick="alert('已是最新版本')">前往更新</span></div>
           <div class="mine-divider"></div>
-          <div class="mine-row">
-            <span class="mine-row-label">語言偏好：</span>
-            <span class="mine-row-value">繁體中文 <img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24"></span>
-          </div>
+          <div class="mine-row"><span class="mine-row-label">語言偏好：</span><span class="mine-row-value">繁體中文</span><img src="icons/icon-24px-chevron-right.svg" alt=">" width="24" height="24" style="margin-left:auto;"></div>
         </div>
       </div>
     </div>
